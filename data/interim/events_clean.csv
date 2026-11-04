@@ -1,0 +1,409 @@
+date,region,event_type,scheduled,decision,change_bp,known_before_fixing,source_link
+2019-01-04,US,us_jobs,yes,,,yes,FRED release 50
+2019-01-11,US,us_cpi,yes,,,yes,FRED release 10
+2019-01-24,EU,ecb_decision,yes,hold,0.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2019-01-30,US,fomc_decision,yes,hold,0.0,no,https://www.federalreserve.gov/monetarypolicy/fomchistorical2019.htm
+2019-02-01,IN,india_budget,yes,,,yes,https://www.indiabudget.gov.in
+2019-02-01,US,us_jobs,yes,,,yes,FRED release 50
+2019-02-07,IN,rbi_decision,yes,cut,-25.0,yes,https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx
+2019-02-11,US,us_cpi,yes,,,yes,FRED release 10
+2019-02-13,US,us_cpi,yes,,,yes,FRED release 10
+2019-03-07,EU,ecb_decision,yes,hold,0.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2019-03-08,US,us_jobs,yes,,,yes,FRED release 50
+2019-03-12,US,us_cpi,yes,,,yes,FRED release 10
+2019-03-20,US,fomc_decision,yes,hold,0.0,no,https://www.federalreserve.gov/monetarypolicy/fomchistorical2019.htm
+2019-04-04,IN,rbi_decision,yes,cut,-25.0,yes,https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx
+2019-04-05,US,us_jobs,yes,,,yes,FRED release 50
+2019-04-10,EU,ecb_decision,yes,hold,0.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2019-04-10,US,us_cpi,yes,,,yes,FRED release 10
+2019-05-01,US,fomc_decision,yes,hold,0.0,no,https://www.federalreserve.gov/monetarypolicy/fomchistorical2019.htm
+2019-05-03,US,us_jobs,yes,,,yes,FRED release 50
+2019-05-10,US,us_cpi,yes,,,yes,FRED release 10
+2019-05-23,IN,india_election,yes,,,no,https://www.eci.gov.in
+2019-06-06,EU,ecb_decision,yes,hold,0.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2019-06-06,IN,rbi_decision,yes,cut,-25.0,yes,https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx
+2019-06-07,US,us_jobs,yes,,,yes,FRED release 50
+2019-06-12,US,us_cpi,yes,,,yes,FRED release 10
+2019-06-19,US,fomc_decision,yes,hold,0.0,no,https://www.federalreserve.gov/monetarypolicy/fomchistorical2019.htm
+2019-07-05,IN,india_budget,yes,,,yes,https://www.indiabudget.gov.in
+2019-07-05,US,us_jobs,yes,,,yes,FRED release 50
+2019-07-11,US,us_cpi,yes,,,yes,FRED release 10
+2019-07-25,EU,ecb_decision,yes,hold,0.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2019-07-31,US,fomc_decision,yes,cut,-25.0,no,https://www.federalreserve.gov/monetarypolicy/fomchistorical2019.htm
+2019-08-02,US,us_jobs,yes,,,yes,FRED release 50
+2019-08-07,IN,rbi_decision,yes,cut,-35.0,yes,https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx
+2019-08-13,US,us_cpi,yes,,,yes,FRED release 10
+2019-09-06,US,us_jobs,yes,,,yes,FRED release 50
+2019-09-12,EU,ecb_decision,yes,cut,-10.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2019-09-12,US,us_cpi,yes,,,yes,FRED release 10
+2019-09-18,US,fomc_decision,yes,cut,-25.0,no,https://www.federalreserve.gov/monetarypolicy/fomchistorical2019.htm
+2019-10-04,IN,rbi_decision,yes,cut,-25.0,yes,https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx
+2019-10-04,US,us_jobs,yes,,,yes,FRED release 50
+2019-10-10,US,us_cpi,yes,,,yes,FRED release 10
+2019-10-24,EU,ecb_decision,yes,hold,0.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2019-10-30,US,fomc_decision,yes,cut,-25.0,no,https://www.federalreserve.gov/monetarypolicy/fomchistorical2019.htm
+2019-11-01,US,us_jobs,yes,,,yes,FRED release 50
+2019-11-13,US,us_cpi,yes,,,yes,FRED release 10
+2019-12-05,IN,rbi_decision,yes,hold,0.0,yes,https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx
+2019-12-06,US,us_jobs,yes,,,yes,FRED release 50
+2019-12-11,US,fomc_decision,yes,hold,0.0,no,https://www.federalreserve.gov/monetarypolicy/fomchistorical2019.htm
+2019-12-11,US,us_cpi,yes,,,yes,FRED release 10
+2019-12-12,EU,ecb_decision,yes,hold,0.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2020-01-10,US,us_jobs,yes,,,yes,FRED release 50
+2020-01-14,US,us_cpi,yes,,,yes,FRED release 10
+2020-01-23,EU,ecb_decision,yes,hold,0.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2020-01-29,US,fomc_decision,yes,hold,0.0,no,https://www.federalreserve.gov/monetarypolicy/fomchistorical2020.htm
+2020-02-01,IN,india_budget,yes,,,yes,https://www.indiabudget.gov.in
+2020-02-06,IN,rbi_decision,yes,hold,0.0,yes,https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx
+2020-02-07,US,us_jobs,yes,,,yes,FRED release 50
+2020-02-11,US,us_cpi,yes,,,yes,FRED release 10
+2020-02-13,US,us_cpi,yes,,,yes,FRED release 10
+2020-03-03,US,fomc_decision,no,cut,-50.0,no,https://www.federalreserve.gov/monetarypolicy/fomchistorical2020.htm
+2020-03-06,US,us_jobs,yes,,,yes,FRED release 50
+2020-03-11,US,us_cpi,yes,,,yes,FRED release 10
+2020-03-12,EU,ecb_decision,yes,hold,0.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2020-03-15,US,fomc_decision,no,cut,-100.0,no,https://www.federalreserve.gov/monetarypolicy/fomchistorical2020.htm
+2020-03-27,IN,rbi_decision,no,cut,-75.0,yes,https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx
+2020-04-03,US,us_jobs,yes,,,yes,FRED release 50
+2020-04-10,US,us_cpi,yes,,,yes,FRED release 10
+2020-04-29,US,fomc_decision,yes,hold,0.0,no,https://www.federalreserve.gov/monetarypolicy/fomchistorical2020.htm
+2020-04-30,EU,ecb_decision,yes,hold,0.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2020-05-08,US,us_jobs,yes,,,yes,FRED release 50
+2020-05-11,US,us_jobs,yes,,,yes,FRED release 50
+2020-05-12,US,us_cpi,yes,,,yes,FRED release 10
+2020-05-22,IN,rbi_decision,no,cut,-40.0,yes,https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx
+2020-06-04,EU,ecb_decision,yes,hold,0.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2020-06-05,US,us_jobs,yes,,,yes,FRED release 50
+2020-06-10,US,fomc_decision,yes,hold,0.0,no,https://www.federalreserve.gov/monetarypolicy/fomchistorical2020.htm
+2020-06-10,US,us_cpi,yes,,,yes,FRED release 10
+2020-07-02,US,us_jobs,yes,,,yes,FRED release 50
+2020-07-14,US,us_cpi,yes,,,yes,FRED release 10
+2020-07-16,EU,ecb_decision,yes,hold,0.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2020-07-29,US,fomc_decision,yes,hold,0.0,no,https://www.federalreserve.gov/monetarypolicy/fomchistorical2020.htm
+2020-08-06,IN,rbi_decision,yes,hold,0.0,yes,https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx
+2020-08-07,US,us_jobs,yes,,,yes,FRED release 50
+2020-08-12,US,us_cpi,yes,,,yes,FRED release 10
+2020-09-04,US,us_jobs,yes,,,yes,FRED release 50
+2020-09-10,EU,ecb_decision,yes,hold,0.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2020-09-11,US,us_cpi,yes,,,yes,FRED release 10
+2020-09-16,US,fomc_decision,yes,hold,0.0,no,https://www.federalreserve.gov/monetarypolicy/fomchistorical2020.htm
+2020-10-02,US,us_jobs,yes,,,yes,FRED release 50
+2020-10-09,IN,rbi_decision,yes,hold,0.0,yes,https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx
+2020-10-13,US,us_cpi,yes,,,yes,FRED release 10
+2020-10-29,EU,ecb_decision,yes,hold,0.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2020-11-03,US,us_election,yes,,,no,https://www.fec.gov
+2020-11-05,US,fomc_decision,yes,hold,0.0,no,https://www.federalreserve.gov/monetarypolicy/fomchistorical2020.htm
+2020-11-06,US,us_jobs,yes,,,yes,FRED release 50
+2020-11-12,US,us_cpi,yes,,,yes,FRED release 10
+2020-12-04,IN,rbi_decision,yes,hold,0.0,yes,https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx
+2020-12-04,US,us_jobs,yes,,,yes,FRED release 50
+2020-12-10,EU,ecb_decision,yes,hold,0.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2020-12-10,US,us_cpi,yes,,,yes,FRED release 10
+2020-12-16,US,fomc_decision,yes,hold,0.0,no,https://www.federalreserve.gov/monetarypolicy/fomchistorical2020.htm
+2021-01-08,US,us_jobs,yes,,,yes,FRED release 50
+2021-01-13,US,us_cpi,yes,,,yes,FRED release 10
+2021-01-21,EU,ecb_decision,yes,hold,0.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2021-01-27,US,fomc_decision,yes,hold,0.0,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2021-02-01,IN,india_budget,yes,,,yes,https://www.indiabudget.gov.in
+2021-02-05,IN,rbi_decision,yes,hold,0.0,yes,https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx
+2021-02-05,US,us_jobs,yes,,,yes,FRED release 50
+2021-02-08,US,us_cpi,yes,,,yes,FRED release 10
+2021-02-10,US,us_cpi,yes,,,yes,FRED release 10
+2021-03-05,US,us_jobs,yes,,,yes,FRED release 50
+2021-03-10,US,us_cpi,yes,,,yes,FRED release 10
+2021-03-11,EU,ecb_decision,yes,hold,0.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2021-03-17,US,fomc_decision,yes,hold,0.0,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2021-04-02,US,us_jobs,yes,,,yes,FRED release 50
+2021-04-07,IN,rbi_decision,yes,hold,0.0,yes,https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx
+2021-04-13,US,us_cpi,yes,,,yes,FRED release 10
+2021-04-22,EU,ecb_decision,yes,hold,0.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2021-04-28,US,fomc_decision,yes,hold,0.0,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2021-05-07,US,us_jobs,yes,,,yes,FRED release 50
+2021-05-12,US,us_cpi,yes,,,yes,FRED release 10
+2021-06-04,IN,rbi_decision,yes,hold,0.0,yes,https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx
+2021-06-04,US,us_jobs,yes,,,yes,FRED release 50
+2021-06-10,EU,ecb_decision,yes,hold,0.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2021-06-10,US,us_cpi,yes,,,yes,FRED release 10
+2021-06-16,US,fomc_decision,yes,hold,0.0,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2021-07-02,US,us_jobs,yes,,,yes,FRED release 50
+2021-07-13,US,us_cpi,yes,,,yes,FRED release 10
+2021-07-22,EU,ecb_decision,yes,hold,0.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2021-07-28,US,fomc_decision,yes,hold,0.0,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2021-08-06,IN,rbi_decision,yes,hold,0.0,yes,https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx
+2021-08-06,US,us_jobs,yes,,,yes,FRED release 50
+2021-08-11,US,us_cpi,yes,,,yes,FRED release 10
+2021-09-03,US,us_jobs,yes,,,yes,FRED release 50
+2021-09-09,EU,ecb_decision,yes,hold,0.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2021-09-14,US,us_cpi,yes,,,yes,FRED release 10
+2021-09-22,US,fomc_decision,yes,hold,0.0,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2021-10-08,IN,rbi_decision,yes,hold,0.0,yes,https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx
+2021-10-08,US,us_jobs,yes,,,yes,FRED release 50
+2021-10-13,US,us_cpi,yes,,,yes,FRED release 10
+2021-10-28,EU,ecb_decision,yes,hold,0.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2021-11-03,US,fomc_decision,yes,hold,0.0,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2021-11-05,US,us_jobs,yes,,,yes,FRED release 50
+2021-11-10,US,us_cpi,yes,,,yes,FRED release 10
+2021-12-03,US,us_jobs,yes,,,yes,FRED release 50
+2021-12-08,IN,rbi_decision,yes,hold,0.0,yes,https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx
+2021-12-10,US,us_cpi,yes,,,yes,FRED release 10
+2021-12-15,US,fomc_decision,yes,hold,0.0,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2021-12-16,EU,ecb_decision,yes,hold,0.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2022-01-07,US,us_jobs,yes,,,yes,FRED release 50
+2022-01-12,US,us_cpi,yes,,,yes,FRED release 10
+2022-01-26,US,fomc_decision,yes,hold,0.0,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2022-02-01,IN,india_budget,yes,,,yes,https://www.indiabudget.gov.in
+2022-02-03,EU,ecb_decision,yes,hold,0.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2022-02-04,US,us_jobs,yes,,,yes,FRED release 50
+2022-02-08,US,us_cpi,yes,,,yes,FRED release 10
+2022-02-10,IN,rbi_decision,yes,hold,0.0,yes,https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx
+2022-02-10,US,us_cpi,yes,,,yes,FRED release 10
+2022-03-04,US,us_jobs,yes,,,yes,FRED release 50
+2022-03-10,EU,ecb_decision,yes,hold,0.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2022-03-10,US,us_cpi,yes,,,yes,FRED release 10
+2022-03-16,US,fomc_decision,yes,hike,25.0,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2022-04-01,US,us_jobs,yes,,,yes,FRED release 50
+2022-04-08,IN,rbi_decision,yes,hold,0.0,yes,https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx
+2022-04-12,US,us_cpi,yes,,,yes,FRED release 10
+2022-04-14,EU,ecb_decision,yes,hold,0.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2022-05-04,US,fomc_decision,yes,hike,50.0,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2022-05-04,IN,rbi_decision,no,hike,40.0,yes,https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx
+2022-05-06,US,us_jobs,yes,,,yes,FRED release 50
+2022-05-11,US,us_cpi,yes,,,yes,FRED release 10
+2022-06-03,US,us_jobs,yes,,,yes,FRED release 50
+2022-06-08,IN,rbi_decision,yes,hike,50.0,yes,https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx
+2022-06-09,EU,ecb_decision,yes,hold,0.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2022-06-10,US,us_cpi,yes,,,yes,FRED release 10
+2022-06-15,US,fomc_decision,yes,hike,75.0,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2022-07-08,US,us_jobs,yes,,,yes,FRED release 50
+2022-07-13,US,us_cpi,yes,,,yes,FRED release 10
+2022-07-21,EU,ecb_decision,yes,hike,50.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2022-07-27,US,fomc_decision,yes,hike,75.0,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2022-08-05,IN,rbi_decision,yes,hike,50.0,yes,https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx
+2022-08-05,US,us_jobs,yes,,,yes,FRED release 50
+2022-08-10,US,us_cpi,yes,,,yes,FRED release 10
+2022-09-02,US,us_jobs,yes,,,yes,FRED release 50
+2022-09-08,EU,ecb_decision,yes,hike,75.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2022-09-13,US,us_cpi,yes,,,yes,FRED release 10
+2022-09-21,US,fomc_decision,yes,hike,75.0,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2022-09-30,IN,rbi_decision,yes,hike,50.0,yes,https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx
+2022-10-07,US,us_jobs,yes,,,yes,FRED release 50
+2022-10-13,US,us_cpi,yes,,,yes,FRED release 10
+2022-10-27,EU,ecb_decision,yes,hike,75.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2022-11-02,US,fomc_decision,yes,hike,75.0,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2022-11-04,US,us_jobs,yes,,,yes,FRED release 50
+2022-11-10,US,us_cpi,yes,,,yes,FRED release 10
+2022-12-02,US,us_jobs,yes,,,yes,FRED release 50
+2022-12-07,IN,rbi_decision,yes,hike,35.0,yes,https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx
+2022-12-13,US,us_cpi,yes,,,yes,FRED release 10
+2022-12-14,US,fomc_decision,yes,hike,50.0,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2022-12-15,EU,ecb_decision,yes,hike,50.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2023-01-06,US,us_jobs,yes,,,yes,FRED release 50
+2023-01-12,US,us_cpi,yes,,,yes,FRED release 10
+2023-02-01,US,fomc_decision,yes,hike,25.0,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2023-02-01,IN,india_budget,yes,,,yes,https://www.indiabudget.gov.in
+2023-02-02,EU,ecb_decision,yes,hike,50.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2023-02-03,US,us_jobs,yes,,,yes,FRED release 50
+2023-02-08,IN,rbi_decision,yes,hike,25.0,yes,https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx
+2023-02-10,US,us_cpi,yes,,,yes,FRED release 10
+2023-02-14,US,us_cpi,yes,,,yes,FRED release 10
+2023-03-10,US,us_jobs,yes,,,yes,FRED release 50
+2023-03-14,US,us_cpi,yes,,,yes,FRED release 10
+2023-03-16,EU,ecb_decision,yes,hike,50.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2023-03-22,US,fomc_decision,yes,hike,25.0,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2023-04-06,IN,rbi_decision,yes,hold,0.0,yes,https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx
+2023-04-07,US,us_jobs,yes,,,yes,FRED release 50
+2023-04-12,US,us_cpi,yes,,,yes,FRED release 10
+2023-05-03,US,fomc_decision,yes,hike,25.0,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2023-05-04,EU,ecb_decision,yes,hike,25.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2023-05-05,US,us_jobs,yes,,,yes,FRED release 50
+2023-05-10,US,us_cpi,yes,,,yes,FRED release 10
+2023-06-02,US,us_jobs,yes,,,yes,FRED release 50
+2023-06-08,IN,rbi_decision,yes,hold,0.0,yes,https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx
+2023-06-13,US,us_cpi,yes,,,yes,FRED release 10
+2023-06-14,US,fomc_decision,yes,hold,0.0,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2023-06-15,EU,ecb_decision,yes,hike,25.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2023-07-07,US,us_jobs,yes,,,yes,FRED release 50
+2023-07-12,US,us_cpi,yes,,,yes,FRED release 10
+2023-07-26,US,fomc_decision,yes,hike,25.0,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2023-07-27,EU,ecb_decision,yes,hike,25.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2023-08-04,US,us_jobs,yes,,,yes,FRED release 50
+2023-08-10,IN,rbi_decision,yes,hold,0.0,yes,https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx
+2023-08-10,US,us_cpi,yes,,,yes,FRED release 10
+2023-09-01,US,us_jobs,yes,,,yes,FRED release 50
+2023-09-13,US,us_cpi,yes,,,yes,FRED release 10
+2023-09-14,EU,ecb_decision,yes,hike,25.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2023-09-20,US,fomc_decision,yes,hold,0.0,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2023-10-06,IN,rbi_decision,yes,hold,0.0,yes,https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx
+2023-10-06,US,us_jobs,yes,,,yes,FRED release 50
+2023-10-12,US,us_cpi,yes,,,yes,FRED release 10
+2023-10-26,EU,ecb_decision,yes,hold,0.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2023-11-01,US,fomc_decision,yes,hold,0.0,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2023-11-03,US,us_jobs,yes,,,yes,FRED release 50
+2023-11-14,US,us_cpi,yes,,,yes,FRED release 10
+2023-12-08,IN,rbi_decision,yes,hold,0.0,yes,https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx
+2023-12-08,US,us_jobs,yes,,,yes,FRED release 50
+2023-12-12,US,us_cpi,yes,,,yes,FRED release 10
+2023-12-13,US,fomc_decision,yes,hold,0.0,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2023-12-14,EU,ecb_decision,yes,hold,0.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2024-01-05,US,us_jobs,yes,,,yes,FRED release 50
+2024-01-10,US,us_jobs,yes,,,yes,FRED release 50
+2024-01-11,US,us_cpi,yes,,,yes,FRED release 10
+2024-01-25,EU,ecb_decision,yes,hold,0.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2024-01-31,US,fomc_decision,yes,hold,0.0,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2024-02-01,IN,india_budget,yes,,,yes,https://www.indiabudget.gov.in
+2024-02-02,US,us_jobs,yes,,,yes,FRED release 50
+2024-02-08,IN,rbi_decision,yes,hold,0.0,yes,https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx
+2024-02-09,US,us_cpi,yes,,,yes,FRED release 10
+2024-02-13,US,us_cpi,yes,,,yes,FRED release 10
+2024-03-07,EU,ecb_decision,yes,hold,0.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2024-03-08,US,us_jobs,yes,,,yes,FRED release 50
+2024-03-12,US,us_cpi,yes,,,yes,FRED release 10
+2024-03-20,US,fomc_decision,yes,hold,0.0,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2024-04-05,IN,rbi_decision,yes,hold,0.0,yes,https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx
+2024-04-05,US,us_jobs,yes,,,yes,FRED release 50
+2024-04-10,US,us_cpi,yes,,,yes,FRED release 10
+2024-04-11,EU,ecb_decision,yes,hold,0.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2024-05-01,US,fomc_decision,yes,hold,0.0,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2024-05-03,US,us_jobs,yes,,,yes,FRED release 50
+2024-05-15,US,us_cpi,yes,,,yes,FRED release 10
+2024-06-04,IN,india_election,yes,,,no,https://www.eci.gov.in
+2024-06-06,EU,ecb_decision,yes,cut,-25.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2024-06-07,IN,rbi_decision,yes,hold,0.0,yes,https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx
+2024-06-07,US,us_jobs,yes,,,yes,FRED release 50
+2024-06-12,US,fomc_decision,yes,hold,0.0,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2024-06-12,US,us_cpi,yes,,,yes,FRED release 10
+2024-07-05,US,us_jobs,yes,,,yes,FRED release 50
+2024-07-11,US,us_cpi,yes,,,yes,FRED release 10
+2024-07-18,EU,ecb_decision,yes,hold,0.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2024-07-23,IN,india_budget,yes,,,yes,https://www.indiabudget.gov.in
+2024-07-31,US,fomc_decision,yes,hold,0.0,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2024-08-02,US,us_jobs,yes,,,yes,FRED release 50
+2024-08-08,IN,rbi_decision,yes,hold,0.0,yes,https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx
+2024-08-14,US,us_cpi,yes,,,yes,FRED release 10
+2024-08-21,US,us_jobs,yes,,,yes,FRED release 50
+2024-09-06,US,us_jobs,yes,,,yes,FRED release 50
+2024-09-11,US,us_cpi,yes,,,yes,FRED release 10
+2024-09-12,EU,ecb_decision,yes,cut,-25.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2024-09-18,US,fomc_decision,yes,cut,-50.0,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2024-10-04,US,us_jobs,yes,,,yes,FRED release 50
+2024-10-09,IN,rbi_decision,yes,hold,0.0,yes,https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx
+2024-10-10,US,us_cpi,yes,,,yes,FRED release 10
+2024-10-17,EU,ecb_decision,yes,cut,-25.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2024-11-01,US,us_jobs,yes,,,yes,FRED release 50
+2024-11-05,US,us_election,yes,,,no,https://www.fec.gov
+2024-11-07,US,fomc_decision,yes,cut,-25.0,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2024-11-13,US,us_cpi,yes,,,yes,FRED release 10
+2024-12-06,IN,rbi_decision,yes,hold,0.0,yes,https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx
+2024-12-06,US,us_jobs,yes,,,yes,FRED release 50
+2024-12-11,US,us_cpi,yes,,,yes,FRED release 10
+2024-12-12,EU,ecb_decision,yes,cut,-25.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2024-12-18,US,fomc_decision,yes,cut,-25.0,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2025-01-10,US,us_jobs,yes,,,yes,FRED release 50
+2025-01-15,US,us_cpi,yes,,,yes,FRED release 10
+2025-01-29,US,fomc_decision,yes,hold,0.0,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2025-01-30,EU,ecb_decision,yes,cut,-25.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2025-02-01,IN,india_budget,yes,,,yes,https://www.indiabudget.gov.in
+2025-02-07,IN,rbi_decision,yes,cut,-25.0,yes,https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx
+2025-02-07,US,us_jobs,yes,,,yes,FRED release 50
+2025-02-12,US,us_cpi,yes,,,yes,FRED release 10
+2025-03-06,EU,ecb_decision,yes,cut,-25.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2025-03-07,US,us_jobs,yes,,,yes,FRED release 50
+2025-03-12,US,us_cpi,yes,,,yes,FRED release 10
+2025-03-19,US,fomc_decision,yes,hold,0.0,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2025-04-04,US,us_jobs,yes,,,yes,FRED release 50
+2025-04-09,IN,rbi_decision,yes,cut,-25.0,yes,https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx
+2025-04-10,US,us_cpi,yes,,,yes,FRED release 10
+2025-04-17,EU,ecb_decision,yes,cut,-25.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2025-05-02,US,us_jobs,yes,,,yes,FRED release 50
+2025-05-07,US,fomc_decision,yes,hold,0.0,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2025-05-13,US,us_cpi,yes,,,yes,FRED release 10
+2025-06-05,EU,ecb_decision,yes,cut,-25.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2025-06-06,IN,rbi_decision,yes,cut,-50.0,yes,https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx
+2025-06-06,US,us_jobs,yes,,,yes,FRED release 50
+2025-06-11,US,us_cpi,yes,,,yes,FRED release 10
+2025-06-18,US,fomc_decision,yes,hold,0.0,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2025-07-03,US,us_jobs,yes,,,yes,FRED release 50
+2025-07-15,US,us_cpi,yes,,,yes,FRED release 10
+2025-07-24,EU,ecb_decision,yes,hold,0.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2025-07-30,US,fomc_decision,yes,hold,0.0,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2025-08-01,US,us_jobs,yes,,,yes,FRED release 50
+2025-08-06,IN,rbi_decision,yes,hold,0.0,yes,https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx
+2025-08-12,US,us_cpi,yes,,,yes,FRED release 10
+2025-09-05,US,us_jobs,yes,,,yes,FRED release 50
+2025-09-11,EU,ecb_decision,yes,hold,0.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2025-09-11,US,us_cpi,yes,,,yes,FRED release 10
+2025-09-17,US,fomc_decision,yes,cut,-25.0,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2025-10-01,IN,rbi_decision,yes,hold,0.0,yes,https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx
+2025-10-24,US,us_cpi,yes,,,yes,FRED release 10
+2025-10-29,US,fomc_decision,yes,cut,-25.0,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2025-10-30,EU,ecb_decision,yes,hold,0.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2025-11-20,US,us_jobs,yes,,,yes,FRED release 50
+2025-12-05,IN,rbi_decision,yes,cut,-25.0,yes,https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx
+2025-12-10,US,fomc_decision,yes,cut,-25.0,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2025-12-16,US,us_jobs,yes,,,yes,FRED release 50
+2025-12-18,EU,ecb_decision,yes,hold,0.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2025-12-18,US,us_cpi,yes,,,yes,FRED release 10
+2026-01-09,US,us_jobs,yes,,,yes,FRED release 50
+2026-01-13,US,us_cpi,yes,,,yes,FRED release 10
+2026-01-28,US,fomc_decision,yes,hold,0.0,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2026-02-01,IN,india_budget,yes,,,yes,https://www.indiabudget.gov.in
+2026-02-05,EU,ecb_decision,yes,hold,0.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2026-02-06,IN,rbi_decision,yes,hold,0.0,yes,https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx
+2026-02-11,US,us_jobs,yes,,,yes,FRED release 50
+2026-02-13,US,us_cpi,yes,,,yes,FRED release 10
+2026-03-06,US,us_jobs,yes,,,yes,FRED release 50
+2026-03-11,US,us_cpi,yes,,,yes,FRED release 10
+2026-03-18,US,fomc_decision,yes,hold,0.0,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2026-03-19,EU,ecb_decision,yes,hold,0.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2026-04-03,US,us_jobs,yes,,,yes,FRED release 50
+2026-04-08,IN,rbi_decision,yes,hold,0.0,yes,https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx
+2026-04-10,US,us_cpi,yes,,,yes,FRED release 10
+2026-04-29,US,fomc_decision,yes,hold,0.0,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2026-04-30,EU,ecb_decision,yes,hold,0.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2026-05-08,US,us_jobs,yes,,,yes,FRED release 50
+2026-05-12,US,us_cpi,yes,,,yes,FRED release 10
+2026-06-05,IN,rbi_decision,yes,hold,0.0,yes,https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx
+2026-06-05,US,us_jobs,yes,,,yes,FRED release 50
+2026-06-10,US,us_cpi,yes,,,yes,FRED release 10
+2026-06-11,EU,ecb_decision,yes,hike,25.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2026-06-17,US,fomc_decision,yes,hold,0.0,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2026-07-02,US,us_jobs,yes,,,yes,FRED release 50
+2026-07-14,US,us_cpi,yes,,,yes,FRED release 10
+2026-07-23,EU,ecb_decision,yes,hold,0.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2026-07-29,US,fomc_decision,yes,hold,0.0,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2026-08-05,IN,rbi_decision,yes,hold,0.0,yes,https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx
+2026-08-07,US,us_jobs,yes,,,yes,FRED release 50
+2026-08-12,US,us_cpi,yes,,,yes,FRED release 10
+2026-09-04,US,us_jobs,yes,,,yes,FRED release 50
+2026-09-10,EU,ecb_decision,yes,hike,25.0,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2026-09-11,US,us_cpi,yes,,,yes,FRED release 10
+2026-09-16,US,fomc_decision,yes,hike,25.0,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2026-10-02,US,us_jobs,yes,,,yes,FRED release 50
+2026-10-07,IN,rbi_decision,yes,hike,25.0,yes,https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx
+2026-10-14,US,us_cpi,yes,,,yes,FRED release 10
+2026-10-28,US,fomc_decision,yes,hold,0.0,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2026-10-29,EU,ecb_decision,yes,,,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2026-11-06,US,us_jobs,yes,,,yes,FRED release 50
+2026-11-10,US,us_cpi,yes,,,yes,FRED release 10
+2026-12-04,IN,rbi_decision,yes,,,yes,https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx
+2026-12-04,US,us_jobs,yes,,,yes,FRED release 50
+2026-12-09,US,fomc_decision,yes,,,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2026-12-10,US,us_cpi,yes,,,yes,FRED release 10
+2026-12-17,EU,ecb_decision,yes,,,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2027-01-27,US,fomc_decision,yes,,,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2027-02-04,EU,ecb_decision,yes,,,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2027-02-05,IN,rbi_decision,yes,,,yes,https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx
+2027-03-17,US,fomc_decision,yes,,,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2027-03-18,EU,ecb_decision,yes,,,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2027-04-28,US,fomc_decision,yes,,,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2027-04-29,EU,ecb_decision,yes,,,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2027-06-09,US,fomc_decision,yes,,,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2027-06-10,EU,ecb_decision,yes,,,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2027-07-22,EU,ecb_decision,yes,,,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2027-07-28,US,fomc_decision,yes,,,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2027-09-09,EU,ecb_decision,yes,,,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2027-09-15,US,fomc_decision,yes,,,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2027-10-27,US,fomc_decision,yes,,,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2027-10-28,EU,ecb_decision,yes,,,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
+2027-12-08,US,fomc_decision,yes,,,no,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2027-12-16,EU,ecb_decision,yes,,,yes,https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html
