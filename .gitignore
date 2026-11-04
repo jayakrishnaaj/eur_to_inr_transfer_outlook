@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+.ipynb_checkpoints/
+
+# Personal editor settings
+.vscode/
+
+# Local database built from the CSVs
+data/*.db
+
+# Secrets (FRED API key)
+.env
+
+# OS files
+.DS_Store
+Thumbs.db
