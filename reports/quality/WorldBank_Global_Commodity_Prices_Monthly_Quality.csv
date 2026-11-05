@@ -1,0 +1,37 @@
+metric,value
+dataset,World Bank Global Commodity Prices - Monthly
+source,data\raw\energy\WorldBank_Global_Commodity_Prices_Monthly.xlsx
+processed,data\processed\WorldBank_Global_Commodity_Prices_Monthly_Clean.csv
+sheet,Monthly Prices
+source_rows_including_header,807
+dated_source_rows,801
+excluded_metadata_or_blank_rows,0
+source_date_min,1960-01-01
+source_date_max,2026-09-01
+processed_rows,81
+processed_date_min,2020-01-01
+processed_date_max,2026-09-01
+duplicate_dates_removed,0
+out_of_range_observations_excluded,720
+missing_gold_usd_per_troy_oz,0
+missing_silver_usd_per_troy_oz,0
+missing_copper_usd_per_mt,0
+missing_aluminum_usd_per_mt,0
+missing_iron_ore_usd_per_dmtu,0
+missing_europe_gas_usd_per_mmbtu,0
+missing_wb_brent_usd_per_barrel,0
+missing_month_count_within_observed_span,0
+missing_months_within_observed_span,none
+unit_gold_usd_per_troy_oz,USD/troy ounce
+unit_silver_usd_per_troy_oz,USD/troy ounce
+unit_copper_usd_per_mt,USD/metric tonne
+unit_aluminum_usd_per_mt,USD/metric tonne
+unit_iron_ore_usd_per_dmtu,USD/dry metric ton unit
+unit_europe_gas_usd_per_mmbtu,USD/million BTU
+unit_wb_brent_usd_per_barrel,USD/barrel
+frequency,monthly
+date_semantics,"First day of reference month, NOT verified publication/availability date"
+publication_alignment,NOT DONE: verify historical release timestamps before predictive ML merges
+imputation,NONE
+outlier_deletion,NONE
+provenance_review,Review workbook provenance and any Mismatch Details sheet before redistribution

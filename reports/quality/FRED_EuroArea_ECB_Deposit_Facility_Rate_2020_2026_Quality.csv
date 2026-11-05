@@ -1,0 +1,30 @@
+metric,value
+dataset,FRED Euro Area ECB Deposit Facility Rate (ECBDFR)
+source,data/raw/interest_rates/FRED_EuroArea_ECB_Deposit_Facility_Rate_2020_2026.csv
+processed,data/processed/FRED_EuroArea_ECB_Deposit_Facility_Rate_2020_2026_Clean.csv
+series,ECBDFR
+frequency,daily (calendar-day observations in uploaded source)
+unit,percent
+study_start,2020-01-01
+study_end,2026-10-29
+raw_rows,2495
+rows_excluded_outside_study_period,1
+processed_rows,2494
+processed_start,2020-01-01
+processed_end,2026-10-29
+exact_duplicates_removed,0
+missing_calendar_day_count,0
+missing_calendar_days,none
+missing_rate_value_count,0
+missing_rate_dates,none
+min_rate_pct,-0.5
+max_rate_pct,4.0
+observed_rate_change_count,20
+observed_rate_changes,2022-07-27: -0.5% -> 0% (+0.5 pp); 2022-09-14: 0% -> 0.75% (+0.75 pp); 2022-11-02: 0.75% -> 1.5% (+0.75 pp); 2022-12-21: 1.5% -> 2% (+0.5 pp); 2023-02-08: 2% -> 2.5% (+0.5 pp); 2023-03-22: 2.5% -> 3% (+0.5 pp); 2023-05-10: 3% -> 3.25% (+0.25 pp); 2023-06-21: 3.25% -> 3.5% (+0.25 pp); 2023-08-02: 3.5% -> 3.75% (+0.25 pp); 2023-09-20: 3.75% -> 4% (+0.25 pp); 2024-06-12: 4% -> 3.75% (-0.25 pp); 2024-09-18: 3.75% -> 3.5% (-0.25 pp); 2024-10-23: 3.5% -> 3.25% (-0.25 pp); 2024-12-18: 3.25% -> 3% (-0.25 pp); 2025-02-05: 3% -> 2.75% (-0.25 pp); 2025-03-12: 2.75% -> 2.5% (-0.25 pp); 2025-04-23: 2.5% -> 2.25% (-0.25 pp); 2025-06-11: 2.25% -> 2% (-0.25 pp); 2026-06-17: 2% -> 2.25% (+0.25 pp); 2026-09-16: 2.25% -> 2.5% (+0.25 pp)
+date_semantics,"Observation/effective date in source, not announcement or publication timestamp"
+imputation,NONE
+outlier_removal,NONE
+coverage_status,COMPLETE
+availability_warning,Historical point-in-time availability and revisions are not established; verify before as-of ML merge
+change_warning,"When a missing-rate day precedes a changed value, its exact effective change date cannot be inferred"
+attribution_warning,Confirm FRED/ECB attribution and redistribution terms for publication

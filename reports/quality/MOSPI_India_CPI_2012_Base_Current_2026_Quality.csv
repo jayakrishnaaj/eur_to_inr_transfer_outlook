@@ -1,0 +1,29 @@
+metric,value
+dataset,"MoSPI India CPI 2012 Base, All India Combined General"
+source,data\raw\inflation\MOSPI_India_CPI_2012_Base_Current_2026.xlsx
+processed,data\processed\MOSPI_India_CPI_2012_Base_Current_2026_Clean.csv
+worksheet,Sheet1
+selected_series,All India / Combined / General / General-Overall
+base_year,2012
+frequency,monthly
+raw_rows,326442
+source_year_counts,2013: 25884; 2014: 25884; 2015: 25884; 2016: 25884; 2017: 25884; 2018: 25884; 2019: 25884; 2020: 15834; 2021: 25884; 2022: 25884; 2023: 25884; 2024: 25884; 2025: 25884
+source_selected_rows,156
+source_selected_date_min,2013-01
+source_selected_date_max,2025-12
+duplicates_removed,0
+out_of_range_observations_excluded,84
+processed_rows,72
+processed_date_min,2020-01-01
+processed_date_max,2025-12-01
+missing_index_values,0
+missing_inflation_values,2
+missing_calendar_months,2026-01; 2026-02; 2026-03; 2026-04; 2026-05; 2026-06; 2026-07; 2026-08; 2026-09; 2026-10
+source_status_counts,F: 154; F*: 2
+unit_index,2012=100
+unit_inflation,percent year-on-year
+date_semantics,"First day of reference month, not publication date"
+publication_alignment,PENDING: verify historical release availability before ML merge
+imputation,NONE
+outlier_deletion,NONE
+coverage_status,PARTIAL

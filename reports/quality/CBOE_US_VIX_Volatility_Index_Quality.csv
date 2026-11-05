@@ -1,0 +1,28 @@
+metric,value
+dataset,Cboe VIX daily close (FRED VIXCLS)
+source,data\raw\currency\CBOE_US_VIX_Volatility_Index.csv
+processed,data\processed\CBOE_US_VIX_Volatility_Index_Clean.csv
+figure,reports\figures\CBOE_US_VIX_Volatility_Index_daily_closes.png
+source_columns,observation_date; VIXCLS
+series_id,VIXCLS
+unit,VIX index points
+frequency,US trading-day closes
+raw_rows,1782
+valid_unique_source_rows,1782
+source_date_min,2019-12-31
+source_date_max,2026-10-28
+processed_rows,1781
+processed_date_min,2020-01-01
+processed_date_max,2026-10-28
+duplicate_dates_removed,0
+out_of_range_observations_excluded,1
+missing_vix_values_preserved,33
+long_calendar_gaps_over_4_days,none
+large_movement_threshold_index_points,8.240000000000027
+large_movement_dates_flagged,2020-02-27; 2020-03-09; 2020-03-12; 2020-03-13; 2020-03-16; 2020-03-30; 2020-06-11; 2021-01-27; 2021-11-26; 2024-08-05; 2024-08-06; 2024-12-18; 2025-04-03; 2025-04-04; 2025-04-09
+date_semantics,"US trading-day closing observation, not verified publication timestamp"
+publication_alignment,PENDING: apply as-of availability timing before historical ML merges; same-day 16:00 Europe/Frankfurt predictions cannot assume the US close is known
+gap_interpretation,Review US market holiday calendars; no dates created
+imputation,NONE
+outlier_deletion,NONE
+sharing_note,Check Cboe/FRED licensing and redistribution permissions before publishing data

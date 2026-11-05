@@ -1,0 +1,22 @@
+metric,value
+dataset,Frankfurter ECB-provider USD/INR cross rate
+source,data\raw\currency\ECB_USD_INR_Exchange_Rate_Daily_2020_2026.csv
+processed,data\processed\ECB_USD_INR_Exchange_Rate_Daily_2020_2026_Clean.csv
+source_columns,date; base; quote; rate
+source_rows,1751
+source_date_min,2019-12-31
+source_date_max,2026-10-29
+processed_rows,1750
+processed_date_min,2020-01-02
+processed_date_max,2026-10-29
+duplicate_dates_removed,0
+missing_rates_preserved,0
+out_of_range_observations_excluded,1
+long_calendar_gaps_over_4_days,2020-04-14 (5 days); 2021-04-06 (5 days); 2022-04-19 (5 days); 2023-04-11 (5 days); 2023-12-27 (5 days); 2024-04-02 (5 days); 2025-04-22 (5 days); 2025-12-29 (5 days); 2026-04-07 (5 days)
+large_movements_flagged,2020-03-26 (change: 1.221000); 2021-02-26 (change: 1.269000); 2026-02-03 (change: 1.430000)
+rate_unit,INR per USD
+date_semantics,Source observation/fixing date; not a verified publication timestamp
+publication_alignment,PENDING: verify historical publication availability before ML merging
+cross_rate_note,Derived USD/INR = (EUR/INR) / (EUR/USD); verify against matching source dates and rates
+calendar_note,ECB holidays may produce longer gaps; do not fabricate dates
+imputation,NONE

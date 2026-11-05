@@ -1,0 +1,32 @@
+metric,value
+dataset,"MoSPI India CPI, 2024 base, Current, All India Combined General"
+source,D:\1. DKE\SEM 2\Data Science with Python(Applied DS)\Project\EUR-INR_Transfer_Outlook\data\raw\inflation\MOSPI_India_CPI_2024_Base_Current_2026.xlsx
+processed,D:\1. DKE\SEM 2\Data Science with Python(Applied DS)\Project\EUR-INR_Transfer_Outlook\data\processed\MOSPI_India_CPI_2024_Base_Current_2026_Clean.csv
+worksheet,CPI Data
+source_series,Current
+base_year,2024
+selected_scope,All India / Combined / CPI (General)
+frequency,monthly
+raw_rows,30030
+source_year_counts,2025: 17160; 2026: 12870
+selected_rows_before_deduplication,21
+selected_source_date_min,2025-01-01
+selected_source_date_max,2026-09-01
+exact_duplicate_months_removed,0
+out_of_range_months_excluded,0
+processed_rows,21
+processed_date_min,2025-01-01
+processed_date_max,2026-09-01
+missing_index_values,0
+missing_inflation_values,12
+missing_months_within_source_coverage,none
+missing_study_period_months,2020-01-01; 2020-02-01; 2020-03-01; 2020-04-01; 2020-05-01; 2020-06-01; 2020-07-01; 2020-08-01; 2020-09-01; 2020-10-01; 2020-11-01; 2020-12-01; 2021-01-01; 2021-02-01; 2021-03-01; 2021-04-01; 2021-05-01; 2021-06-01; 2021-07-01; 2021-08-01; 2021-09-01; 2021-10-01; 2021-11-01; 2021-12-01; 2022-01-01; 2022-02-01; 2022-03-01; 2022-04-01; 2022-05-01; 2022-06-01; 2022-07-01; 2022-08-01; 2022-09-01; 2022-10-01; 2022-11-01; 2022-12-01; 2023-01-01; 2023-02-01; 2023-03-01; 2023-04-01; 2023-05-01; 2023-06-01; 2023-07-01; 2023-08-01; 2023-09-01; 2023-10-01; 2023-11-01; 2023-12-01; 2024-01-01; 2024-02-01; 2024-03-01; 2024-04-01; 2024-05-01; 2024-06-01; 2024-07-01; 2024-08-01; 2024-09-01; 2024-10-01; 2024-11-01; 2024-12-01; 2026-10-01
+source_imputation_flag_counts,(blank): 21
+unit_index,2024=100
+unit_inflation,"percent, year-on-year"
+date_semantics,"First day of reference month, not release date"
+imputation_performed_by_cleaner,NONE
+outlier_deletion,NONE
+coverage_status,PARTIAL
+publication_alignment,UNVERIFIED: check release dates before leakage-safe modeling
+base_transition,Do not concatenate 2012-base and 2024-base CPI levels without validated linking

@@ -1,0 +1,16 @@
+metric,value
+source,RBI Daily Foreign Exchange Spot Rates
+raw_rows,6818
+rows_exported,1649
+excluded_explanatory_rows,1
+duplicate_dates_removed,0
+missing_usd_inr_values,1
+missing_gbp_inr_values,1
+missing_eur_inr_values,1
+missing_jpy_inr_values,1
+start_observation_date,2020-01-01
+end_observation_date,2026-10-29
+flagged_gap_dates,2021-04-05; 2021-11-08; 2022-04-18; 2022-08-17; 2023-01-30; 2024-04-02; 2025-04-02
+imputation,NONE
+publication_alignment,NOT DONE: RBI observation dates represent source dates; historical publication availability must be verified.
+jpy_unit,INR per 100 JPY

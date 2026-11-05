@@ -1,0 +1,22 @@
+metric,value
+dataset,India CPI 2024-base Back (retrospective historical series)
+source_file,MOSPI_India_CPI_2024_Base_Historical_Through_2026.xlsx
+source_sheet,CPI Data
+source_rows_scanned,432
+source_rows_by_year,"{""2013"": 36, ""2014"": 36, ""2015"": 36, ""2016"": 36, ""2017"": 36, ""2018"": 36, ""2019"": 36, ""2020"": 36, ""2021"": 36, ""2022"": 36, ""2023"": 36, ""2024"": 36}"
+selection,"All India / Combined / CPI (General), no subcategory"
+source_series,Back
+reference_month_first,2020-01-01
+reference_month_last,2024-12-01
+processed_rows,60
+duplicate_identical_months_removed,0
+missing_months_inside_coverage,[]
+missing_cpi_index,0
+missing_annual_inflation_count,0
+missing_annual_inflation_months,[]
+units,"{""india_cpi_2024base_back_index"": ""2024=100"", ""india_cpi_2024base_back_annual_inflation_pct"": ""percent year-on-year""}"
+imputation,none
+date_meaning,"first day of reference month, not publication date"
+availability_warning,Back series is retrospective and must not be used as if known at historical observation dates.
+coverage_warning,This Back workbook ends December 2024; 2025–2026 require a separate source.
+base_year_warning,Do not directly concatenate 2012-base and 2024-base CPI index levels.

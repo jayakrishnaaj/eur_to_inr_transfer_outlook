@@ -1,0 +1,19 @@
+metric,value
+dataset,ECB EUR/INR via Frankfurter
+source,data\raw\currency\ECB_EUR_INR_Exchange_Rate_Daily_2020_2026.csv
+processed,data\processed\ECB_EUR_INR_Exchange_Rate_Daily_2020_2026_Clean.csv
+source_columns,date; base; quote; rate
+source_rows,1751
+source_date_min,2019-12-31
+source_date_max,2026-10-29
+processed_rows,1750
+processed_date_min,2020-01-02
+processed_date_max,2026-10-29
+duplicate_dates_removed,0
+missing_rates_preserved,0
+out_of_range_observations_excluded,1
+long_calendar_gaps_over_4_days,2020-04-14 (5 days); 2021-04-06 (5 days); 2022-04-19 (5 days); 2023-04-11 (5 days); 2023-12-27 (5 days); 2024-04-02 (5 days); 2025-04-22 (5 days); 2025-12-29 (5 days); 2026-04-07 (5 days)
+rate_unit,INR per EUR
+date_semantics,"ECB reference fixing date, not independently verified publication timestamp"
+publication_alignment,PENDING: ECB rates normally published around 16:00 Europe/Frankfurt on TARGET working days.
+imputation,NONE

@@ -1,0 +1,34 @@
+metric,value
+dataset,RBI Table No. 33 - Foreign Exchange Reserves - Weekly
+source,data\raw\currency\RBI_India_Forex_Reserves_Weekly.xlsx
+processed,data\processed\RBI_India_Forex_Reserves_Weekly_Clean.csv
+sheet,Report 1
+raw_rows,1371
+excluded_header_footer_or_blank_rows,35
+valid_unique_dated_source_rows,1336
+source_date_min,2001-04-06
+source_date_max,2026-10-16
+processed_rows,355
+processed_date_min,2020-01-03
+processed_date_max,2026-10-16
+duplicate_dates_removed,0
+out_of_range_observations_excluded,981
+missing_rbi_total_reserves_inr_crore,0
+missing_rbi_total_reserves_usd_mn,0
+missing_rbi_foreign_currency_assets_inr_crore,0
+missing_rbi_foreign_currency_assets_usd_mn,0
+missing_rbi_reserve_gold_value_inr_crore,0
+missing_rbi_reserve_gold_value_usd_mn,0
+missing_rbi_reserve_gold_volume_metric_tonnes,40
+missing_rbi_sdr_value_inr_crore,0
+missing_rbi_sdr_holdings_sdr_mn,4
+missing_rbi_sdr_value_usd_mn,0
+missing_rbi_imf_reserve_tranche_inr_crore,0
+missing_rbi_imf_reserve_tranche_usd_mn,0
+interval_distribution_calendar_days,7 days: 354
+gaps_longer_than_10_calendar_days,none
+gap_interpretation,"Weekly dates may shift due to holidays; flagged gaps require review, not filling"
+units,"INR crore, USD million, metric tonnes and SDR million as named in columns"
+date_semantics,"Weekly RBI observation/reporting date, not verified release date"
+publication_alignment,NOT DONE: verify actual release availability before historical ML merges
+imputation,NONE

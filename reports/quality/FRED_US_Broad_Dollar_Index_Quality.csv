@@ -1,0 +1,10 @@
+metric,value
+source,FRED DTWEXBGS (Federal Reserve H.10)
+raw_rows,1779
+rows_exported,1778
+duplicate_dates_removed,0
+missing_index_values,75
+start_observation_date,2020-01-01
+end_observation_date,2026-10-23
+flagged_jump_dates,2020-03-26
+publication_alignment,NOT DONE: H.10 daily observations published in weekly releases; map to actual release timestamps at merge stage

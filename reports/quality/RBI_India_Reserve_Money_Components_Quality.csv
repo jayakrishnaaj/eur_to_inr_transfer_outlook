@@ -1,0 +1,31 @@
+metric,value
+dataset,RBI India Reserve Money Components
+source,data\raw\currency\RBI_India_Reserve_Money_Components.xlsx
+processed,data\processed\RBI_India_Reserve_Money_Components_Clean.csv
+sheet,Report(i)
+source_units,INR million (all numeric columns)
+raw_rows,1314
+excluded_notes_or_blank_rows,6
+valid_unique_dated_source_rows,1308
+source_date_min,2001-07-06
+source_date_max,2026-10-15
+processed_rows,336
+processed_date_min,2020-01-03
+processed_date_max,2026-10-15
+duplicate_dates_removed,0
+out_of_range_observations_excluded,972
+missing_rbi_reserve_money_inr_mn,0
+missing_rbi_currency_in_circulation_inr_mn,0
+missing_rbi_bankers_deposits_inr_mn,0
+missing_rbi_other_deposits_inr_mn,0
+missing_rbi_net_credit_government_inr_mn,0
+missing_rbi_credit_banks_inr_mn,0
+missing_rbi_credit_commercial_sector_inr_mn,0
+missing_rbi_net_foreign_exchange_assets_inr_mn,0
+missing_rbi_government_currency_liabilities_inr_mn,0
+missing_rbi_net_nonmonetary_liabilities_inr_mn,0
+gaps_longer_than_7_calendar_days,2025-01-24 (14 days); 2025-12-31 (16 days); 2026-01-15 (15 days); 2026-01-31 (16 days); 2026-02-15 (15 days); 2026-02-28 (13 days); 2026-03-15 (15 days); 2026-03-31 (16 days); 2026-04-15 (15 days); 2026-04-30 (15 days); 2026-05-15 (15 days); 2026-05-31 (16 days); 2026-06-15 (15 days); 2026-06-30 (15 days); 2026-07-15 (15 days); 2026-07-31 (16 days); 2026-08-15 (15 days); 2026-08-31 (16 days); 2026-09-15 (15 days); 2026-09-30 (15 days); 2026-10-15 (15 days)
+gap_interpretation,Review against RBI reporting frequency; weekly/semi-monthly gaps may be expected
+date_semantics,"RBI source observation date, not verified publication date"
+publication_alignment,NOT DONE: verify actual release availability before historical ML merges
+imputation,NONE

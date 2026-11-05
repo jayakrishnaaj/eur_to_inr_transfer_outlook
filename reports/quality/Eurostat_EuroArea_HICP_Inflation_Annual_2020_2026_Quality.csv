@@ -1,0 +1,31 @@
+metric,value
+dataset,Eurostat Euro Area All-Items HICP Annual Rate of Change (Monthly)
+source,data\raw\inflation\Eurostat_EuroArea_HICP_Inflation_Annual_2020_2026.xlsx
+processed,data\processed\Eurostat_EuroArea_HICP_Inflation_Annual_2020_2026_Clean.csv
+worksheet,Sheet 1
+source_geography,"Euro area (EA11-1999, EA12-2001, EA13-2007, EA15-2008, EA16-2009, EA17-2011, EA18-2014, EA19-2015, EA20-2023, EA21-2026)"
+source_row_excel,13
+source_dataset_label,"Harmonised index of consumer prices (HICP) - ECOICOP ver.2 - indices and rates of change, monthly data [prc_hicp_minr__custom_23819563]"
+source_last_updated,16/10/2026 23:00
+source_measure,Annual rate of change; Monthly; Total HICP
+source_month_headings,82
+source_period_min,2019-12
+source_period_max,2026-09
+out_of_range_periods_excluded,1
+processed_rows,81
+processed_date_min,2020-01-01
+processed_date_max,2026-09-01
+missing_values_preserved,0
+missing_months_without_source_column,2026-10
+observation_flags_for_review,none
+large_changes_flagged,none
+large_change_threshold_percentage_points,3.199999999999996
+min_valid_pct,-0.3
+max_valid_pct,10.6
+unit,Percent year over year; monthly observations
+date_semantics,First day of reference month; NOT publication/availability date
+publication_alignment,NOT DONE: verify historical Eurostat release timestamps before as-of ML merges
+revision_risk,Downloaded workbook is a snapshot; historical first-published values may differ
+composition_risk,Evolving euro-area membership; confirm geography definition for longitudinal analyses
+imputation,NONE
+outlier_deletion,NONE

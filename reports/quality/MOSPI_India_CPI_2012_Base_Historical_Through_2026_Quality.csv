@@ -1,0 +1,29 @@
+metric,value
+dataset,"MoSPI India CPI 2012 Base Historical, All India Combined General"
+source,data\raw\inflation\MOSPI_India_CPI_2012_Base_Historical_Through_2026.xlsx
+processed,data\processed\MOSPI_India_CPI_2012_Base_Historical_Through_2026_Clean.csv
+worksheet,Sheet1
+selected_series,All India / Combined / General / General-Overall
+base_year,2012
+frequency,monthly
+raw_rows,52863
+source_year_counts,2011: 25884; 2012: 25884; 2013: 1095
+source_selected_rows,29
+source_selected_date_min,2011-01
+source_selected_date_max,2013-05
+duplicates_removed,0
+out_of_range_observations_excluded,0
+processed_rows,29
+processed_date_min,2011-01-01
+processed_date_max,2013-05-01
+missing_index_values,0
+missing_inflation_values,12
+missing_calendar_months,none
+source_status_counts,F: 29
+unit_index,2012=100
+unit_inflation,percent year-on-year
+date_semantics,"First day of reference month, not publication date"
+publication_alignment,PENDING: verify historical release availability before ML merge; do not silently merge with current workbook because overlapping observations may disagree
+imputation,NONE
+outlier_deletion,NONE
+coverage_status,COMPLETE

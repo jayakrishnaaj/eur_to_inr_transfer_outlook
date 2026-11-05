@@ -1,0 +1,22 @@
+metric,value
+dataset,FRED USD/INR daily exchange rate (DEXINUS)
+source,data\raw\currency\FRED_USD_INR_Exchange_Rate_Daily_2020_2026.csv
+processed,data\processed\FRED_USD_INR_Exchange_Rate_Daily_2020_2026_Clean.csv
+source_series,FRED DEXINUS (Federal Reserve H.10)
+source_columns,observation_date; DEXINUS
+raw_rows,1779
+valid_unique_dated_source_rows,1779
+source_date_min,2019-12-31
+source_date_max,2026-10-23
+processed_rows,1778
+processed_date_min,2020-01-01
+processed_date_max,2026-10-23
+duplicate_dates_removed,0
+out_of_range_observations_excluded,1
+missing_rates_preserved,75
+long_calendar_gaps_over_4_days,none
+large_movements_flagged,2020-03-26 (change: 1.470000); 2026-10-13 (change: 1.450000)
+unit,INR per USD
+date_semantics,"FRED source observation date, not verified publication timestamp"
+publication_alignment,NOT DONE: verify actual H.10 release availability before historical ML merges
+imputation,NONE

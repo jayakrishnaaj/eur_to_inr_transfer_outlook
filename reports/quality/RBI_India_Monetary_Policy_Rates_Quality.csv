@@ -1,0 +1,26 @@
+metric,value
+dataset,RBI monetary policy rates - flattened table export
+source_file,RBI_India_Monetary_Policy_Rates.csv
+source_schema,"src_file,tab,period,row_no,c1,c2,c3,c4,c5,c6,c7,c8"
+source_tab,Report 1
+study_period_start,2020-01-01
+study_period_end,2026-10-29
+raw_csv_rows,270
+non_dated_metadata_or_note_rows,11
+dated_effective_date_rows,259
+study_period_dated_rows,26
+source_first_effective_date,1935-07-05
+source_last_effective_date,2025-12-05
+duplicate_effective_dates,0
+dated_rows_with_all_rate_cells_missing,259
+repo_rate_numeric_observations_c3,0
+numeric_observations_all_rate_columns,0
+numeric_observations_by_column,c2=0; c3=0; c4=0; c5=0; c6=0; c7=0; c8=0
+dated_rows_by_year,1935=2; 1949=1; 1951=1; 1957=1; 1960=3; 1962=1; 1963=1; 1964=2; 1965=1; 1968=1; 1970=3; 1971=1; 1972=2; 1973=5; 1974=4; 1976=2; 1978=1; 1981=7; 1982=3; 1983=3; 1984=3; 1985=2; 1987=3; 1988=3; 1989=1; 1990=1; 1991=2; 1993=8; 1994=6; 1995=2; 1996=5; 1997=8; 1998=7; 1999=5; 2000=6; 2001=12; 2002=7; 2003=6; 2004=4; 2005=2; 2006=5; 2007=9; 2008=15; 2009=5; 2010=10; 2011=7; 2012=7; 2013=8; 2014=3; 2015=5; 2016=5; 2017=5; 2018=2; 2019=9; 2020=6; 2021=2; 2022=7; 2023=1; 2024=2; 2025=8
+source_missing_token_semantics,Dash is source no-change marker; blank rate cells are not usable values
+source_event_audit_file,reports\quality\RBI_India_Monetary_Policy_Rates_Effective_Dates_Audit.csv
+daily_rate_csv_created,NO
+imputation,NONE
+publication_alignment,UNVERIFIED - effective dates do not establish publication dates
+quality_status,BLOCKED_NO_REPO_RATES
+recommended_action,Use separately verified original RBI workbook and its daily repo-rate series; do not treat this dates-only CSV as independent numeric data

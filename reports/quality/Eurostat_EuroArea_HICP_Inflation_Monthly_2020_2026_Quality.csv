@@ -1,0 +1,28 @@
+metric,value
+dataset,Eurostat Euro Area HICP Monthly Inflation
+source,data\raw\inflation\Eurostat_EuroArea_HICP_Inflation_Monthly_2020_2026.xlsx
+processed,data\processed\Eurostat_EuroArea_HICP_Inflation_Monthly_2020_2026_Clean.csv
+worksheet,Sheet 1
+source_series,"Euro area (EA11-1999, EA12-2001, EA13-2007, EA15-2008, EA16-2009, EA17-2011, EA18-2014, EA19-2015, EA20-2023, EA21-2026)"
+frequency,monthly
+measure,Month-on-month percentage change in all-items HICP
+unit,percent
+source_period_columns,82
+out_of_range_periods_excluded,1
+processed_rows,81
+processed_date_min,2020-01-01
+processed_date_max,2026-09-01
+duplicate_months_removed,0
+missing_values_preserved,0
+missing_calendar_months,2026-10
+minimum_valid_pct,-1.0
+maximum_valid_pct,2.4
+observation_flags,none
+large_change_threshold_percentage_points,4.099999999999999
+large_change_months_to_review,none
+date_semantics,First day of reference month; not a publication timestamp
+publication_alignment,PENDING: verify historical release availability before as-of ML merge
+revision_risk,Current export may differ from first-published historical values
+composition_risk,Evolving euro-area aggregate; membership changes require interpretation
+imputation,NONE
+outlier_deletion,NONE

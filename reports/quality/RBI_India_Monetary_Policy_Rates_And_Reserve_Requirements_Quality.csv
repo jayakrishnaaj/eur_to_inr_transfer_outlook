@@ -1,0 +1,30 @@
+metric,value
+dataset,RBI repo rate — daily prevailing effective policy rate
+source,data/raw/interest_rates/RBI_India_Monetary_Policy_Rates_And_Reserve_Requirements.xlsx
+processed,data/processed/RBI_India_Monetary_Policy_Rates_And_Reserve_Requirements_Clean.csv
+source_events,reports/quality/RBI_India_Monetary_Policy_Rates_And_Reserve_Requirements_source_events.csv
+worksheet,Report 1
+source_date_column,B
+source_repo_column,D
+source_dated_rows,260
+source_rows_by_year,1935: 2; 1949: 1; 1951: 1; 1957: 1; 1960: 3; 1962: 1; 1963: 1; 1964: 2; 1965: 1; 1968: 1; 1970: 3; 1971: 1; 1972: 2; 1973: 5; 1974: 4; 1976: 2; 1978: 1; 1981: 7; 1982: 3; 1983: 3; 1984: 3; 1985: 2; 1987: 3; 1988: 3; 1989: 1; 1990: 1; 1991: 2; 1993: 8; 1994: 6; 1995: 2; 1996: 5; 1997: 8; 1998: 7; 1999: 5; 2000: 6; 2001: 12; 2002: 7; 2003: 6; 2004: 4; 2005: 2; 2006: 5; 2007: 9; 2008: 15; 2009: 5; 2010: 10; 2011: 7; 2012: 7; 2013: 8; 2014: 3; 2015: 5; 2016: 5; 2017: 5; 2018: 2; 2019: 9; 2020: 6; 2021: 2; 2022: 7; 2023: 1; 2024: 2; 2025: 8; 2026: 1
+source_explicit_repo_entries,72
+study_period_start,2020-01-01
+study_period_end,2026-10-29
+daily_processed_rows,2494
+missing_daily_rates,0
+initial_event_date,2019-10-04
+initial_repo_rate_pct,5.15
+explicit_repo_entries_in_study,14
+actual_repo_rate_changes_in_study,13
+unchanged_explicit_repo_entries_in_study,1
+duplicate_explicit_repo_dates,0
+rate_changes,2020-03-27: 5.15 -> 4.4; 2020-05-22: 4.4 -> 4; 2022-05-04: 4 -> 4.4; 2022-06-08: 4.4 -> 4.9; 2022-08-05: 4.9 -> 5.4; 2022-09-30: 5.4 -> 5.9; 2022-12-07: 5.9 -> 6.25; 2023-02-08: 6.25 -> 6.5; 2025-02-07: 6.5 -> 6.25; 2025-04-09: 6.25 -> 6; 2025-06-06: 6 -> 5.5; 2025-12-05: 5.5 -> 5.25; 2026-10-07: 5.25 -> 5.5
+last_repo_rate_pct,5.5
+source_dash_meaning,No change (RBI source footnote)
+unit,percent
+frequency,daily calendar dates; previous effective rate remains in force
+date_semantics,"Policy effective date, not policy announcement date"
+imputation,NONE; daily expansion of a known effective-date policy state
+publication_alignment,UNVERIFIED: effective dates do not establish announcement timestamps or historical as-of availability
+coverage_caution,"Study window ending 2026-10-29 exceeds last source event; rate carried forward as prevailing state, not a new source observation"
