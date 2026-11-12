@@ -1,0 +1,106 @@
+column,missing_on_all_days,missing_on_rate_days,of_which_before_2020-01-08,missing_in_clean_file,action
+eur_inr,750,0,0,0,"target: rows without a rate (weekends, ECB holidays, days after the last fixing) removed"
+is_ecb_day,0,0,0,,dropped: constant on ECB days
+eur_inr_prev,2,1,1,0,kept
+fpi_equity_day,7,0,0,,dropped: replaced by fpi_equity_day_since_fix (includes weekend/holiday values)
+fpi_debt_day,7,0,0,,dropped: replaced by fpi_debt_day_since_fix (includes weekend/holiday values)
+fpi_total_day,7,0,0,,dropped: replaced by fpi_total_day_since_fix (includes weekend/holiday values)
+fpi_equity_1w,7,4,4,0,kept
+fpi_equity_4w,28,19,4,15,kept
+fpi_debt_1w,7,4,4,0,kept
+fpi_debt_4w,28,19,4,15,kept
+fpi_total_1w,7,4,4,0,kept
+fpi_total_4w,28,19,4,15,kept
+ea_esi,0,0,0,0,kept
+ea_gdp_yoy,0,0,0,0,kept
+ea_hicp_yoy,0,0,0,0,kept
+ea_unemployment,0,0,0,0,kept
+in_cpi_yoy,0,0,0,0,kept
+in_gdp_yoy,0,0,0,0,kept
+in_iip_yoy,0,0,0,0,kept
+ea_esi_chg,0,0,0,0,kept
+ea_gdp_yoy_chg,0,0,0,0,kept
+ea_hicp_yoy_chg,0,0,0,0,kept
+ea_unemployment_chg,0,0,0,0,kept
+in_cpi_yoy_chg,0,0,0,0,kept
+in_gdp_yoy_chg,0,0,0,0,kept
+in_iip_yoy_chg,0,0,0,0,kept
+in_ea_inflation_gap,0,0,0,0,kept
+in_ea_growth_gap,0,0,0,0,kept
+vix,0,0,0,0,kept
+baa_spread,0,0,0,0,kept
+vix_chg_1w,0,0,0,0,kept
+vix_avg_4w,0,0,0,0,kept
+baa_spread_chg_1w,0,0,0,0,kept
+baa_spread_avg_4w,0,0,0,0,kept
+ea_current_account_eur_bn,0,0,0,0,kept
+ea_current_account_eur_bn_chg,0,0,0,0,kept
+ea_goods_balance_eur_bn,0,0,0,0,kept
+ea_goods_balance_eur_bn_chg,0,0,0,0,kept
+india_exports_usd_bn,0,0,0,0,kept
+india_exports_usd_bn_chg,0,0,0,0,kept
+india_imports_usd_bn,0,0,0,0,kept
+india_imports_usd_bn_chg,0,0,0,0,kept
+india_trade_balance_usd_bn,0,0,0,0,kept
+india_trade_balance_usd_bn_chg,0,0,0,0,kept
+india_trade_balance_usd_bn_avg_3m,0,0,0,0,kept
+total_inr_cr,0,0,0,0,kept
+total_usd_mn,0,0,0,0,kept
+fca_usd_mn,0,0,0,0,kept
+gold_usd_mn,0,0,0,0,kept
+sdr_usd_mn,0,0,0,0,kept
+imf_rtp_usd_mn,0,0,0,0,kept
+ex_gold_usd_mn,0,0,0,0,kept
+total_chg_1w,0,0,0,0,kept
+total_chg_4w,0,0,0,0,kept
+fca_chg_1w,0,0,0,0,kept
+fca_chg_4w,0,0,0,0,kept
+ex_gold_chg_1w,0,0,0,0,kept
+ex_gold_chg_4w,0,0,0,0,kept
+eur_usd_usd_per_eur,2,1,1,0,kept
+usd_inr_inr_per_usd,2,1,1,0,kept
+brent_usd_per_barrel,2,1,1,0,kept
+us_10y_treasury_yield_pct,2,1,1,0,kept
+broad_usd_index_2006_100,2,1,1,0,kept
+rbi_repo_rate_pct,0,0,0,0,kept
+ecb_deposit_rate_pct,0,0,0,0,kept
+rate_gap_in_ea,0,0,0,0,kept
+gpr,0,0,0,0,kept
+us_epu,0,0,0,0,kept
+gpr_india,0,0,0,0,kept
+in_epu,0,0,0,0,kept
+eu_epu,0,0,0,0,kept
+weekday,0,0,0,0,kept
+day_of_month,0,0,0,0,kept
+month,0,0,0,0,kept
+is_weekend,0,0,0,,dropped: constant on ECB days
+is_de_holiday,0,0,0,0,kept
+is_in_holiday,0,0,0,0,kept
+is_payday_window,0,0,0,0,kept
+is_diwali,0,0,0,0,kept
+days_to_diwali,0,0,0,0,kept
+is_december,0,0,0,0,kept
+is_india_fy_end,0,0,0,0,kept
+is_ecb_decision_day,0,0,0,,dropped: replaced by is_ecb_decision_day_since_fix (includes weekend/holiday values)
+days_to_ecb_decision,0,0,0,0,kept
+is_rbi_decision_day,0,0,0,,dropped: replaced by is_rbi_decision_day_since_fix (includes weekend/holiday values)
+days_to_rbi_decision,0,0,0,0,kept
+is_fomc_decision_day,0,0,0,,dropped: replaced by is_fomc_decision_day_since_fix (includes weekend/holiday values)
+days_to_fomc_decision,0,0,0,0,kept
+is_us_cpi_day,0,0,0,,dropped: replaced by is_us_cpi_day_since_fix (includes weekend/holiday values)
+days_to_us_cpi,0,0,0,0,kept
+is_us_jobs_day,0,0,0,,dropped: replaced by is_us_jobs_day_since_fix (includes weekend/holiday values)
+days_to_us_jobs,0,0,0,0,kept
+is_india_budget_day,0,0,0,,dropped: replaced by is_india_budget_day_since_fix (includes weekend/holiday values)
+last_ecb_decision_bp,0,0,0,0,kept
+last_rbi_decision_bp,0,0,0,0,kept
+last_fomc_decision_bp,0,0,0,0,kept
+fpi_equity_day_since_fix,8,1,1,0,kept
+fpi_debt_day_since_fix,8,1,1,0,kept
+fpi_total_day_since_fix,8,1,1,0,kept
+is_ecb_decision_day_since_fix,0,0,0,0,kept
+is_rbi_decision_day_since_fix,0,0,0,0,kept
+is_fomc_decision_day_since_fix,0,0,0,0,kept
+is_us_cpi_day_since_fix,0,0,0,0,kept
+is_us_jobs_day_since_fix,0,0,0,0,kept
+is_india_budget_day_since_fix,0,0,0,0,kept
