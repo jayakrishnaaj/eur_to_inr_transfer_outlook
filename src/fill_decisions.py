@@ -7,7 +7,6 @@ load_dotenv()
 KEY = os.environ["FRED_API_KEY"]
 START = "2019-01-01"
 
-# event type -> (FRED series, days to wait for the new rate to take effect)
 RATE_SERIES = {
     "fomc_decision": ("DFEDTARU", 7),    # Fed: new rate applies the next day
     "ecb_decision":  ("ECBDFR",  14),    # ECB: new rate applies about a week later
@@ -39,11 +38,9 @@ for etype, (series_id, window) in RATE_SERIES.items():
     last_rate_day = rate.index.max()
     sub = meetings[meetings["event_type"] == etype].sort_values("date")
 
-    # --- fill in each meeting's outcome ---
     for _, m in sub.iterrows():
         effective_check = m["date"] + pd.Timedelta(days=window)
         if effective_check > last_rate_day:
-            # future meeting (or too recent to see the new rate): leave the outcome empty
             decision, change = "", ""
         else:
             before = rate.asof(m["date"])           # rate on announcement day
@@ -57,7 +54,6 @@ for etype, (series_id, window) in RATE_SERIES.items():
             "source_link": m["source_link"],
         })
 
-    # --- cross-check: every rate change must belong to a meeting in the list ---
     changes = rate[rate.diff() != 0].iloc[1:]
     changes = changes[changes.index >= START]
     missed = [d.date() for d in changes.index
