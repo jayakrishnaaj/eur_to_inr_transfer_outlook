@@ -6,9 +6,7 @@ import pandas as pd
 os.makedirs("data/raw", exist_ok=True)
 os.makedirs("data/interim", exist_ok=True)
 
-# ---------- SETTINGS ----------
-# Test first with one month. For the full download later, change to:
-#   START, END = "2019-01-01", (today's date)
+
 START, END = "2024-10-01", "2024-10-31"
 
 TOPICS = {                                   # short name -> what GDELT searches for
@@ -56,7 +54,7 @@ def fetch(query, mode, start, end):
     return df[["datetime", "value"]]
 
 
-# ---------- 1. COLLECT: month by month, topic by topic ----------
+
 months = pd.date_range(START, END, freq="MS")
 results = {}
 for name, query in TOPICS.items():
@@ -69,7 +67,7 @@ for name, query in TOPICS.items():
         raw = pd.concat(pieces, ignore_index=True)
         raw.to_csv(f"data/raw/gdelt_{name}_{col}.csv", index=False)   # untouched copy
 
-        # ---------- 2. CLEAN: one value per day ----------
+       
         raw["date"] = raw["datetime"].dt.normalize()
         how = "sum" if col == "count" else "mean"   # counts add up, moods average out
         results[f"{name}_{col}"] = raw.groupby("date")["value"].agg(how)
@@ -80,7 +78,7 @@ daily.index.name = "date"
 count_cols = [c for c in daily.columns if c.endswith("_count")]
 daily[count_cols] = daily[count_cols].fillna(0)                # no articles = 0 articles
 
-# ---------- 3. INSPECT ----------
+
 print(f"\nDays: {len(daily)} from {daily.index.min().date()} to {daily.index.max().date()}")
 print("\nMissing values per column (tone is empty on days with no articles):")
 print(daily.isna().sum())
@@ -90,6 +88,6 @@ print("\nBusiest day per topic:")
 for c in count_cols:
     print(f"  {c:12s} {daily[c].idxmax().date()}  ({int(daily[c].max())} articles)")
 
-# ---------- 4. SAVE ----------
+
 daily.to_csv("data/interim/gdelt_daily.csv")
 print("\nSaved data/interim/gdelt_daily.csv")

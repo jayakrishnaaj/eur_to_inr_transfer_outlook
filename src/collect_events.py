@@ -7,9 +7,8 @@ load_dotenv()
 KEY = os.environ["FRED_API_KEY"]
 os.makedirs("data/raw", exist_ok=True)
 os.makedirs("data/interim", exist_ok=True)
-START = "2019-01-01"   # team decision: train from 2020, one warm-up year before
+START = "2019-01-01"   # team decision: train from 2020
 
-# ---------- 1. COLLECT (automatic): US release dates from FRED ----------
 RELEASES = {10: "us_cpi", 50: "us_jobs"}
 
 
@@ -39,12 +38,10 @@ def fred_release_dates(release_id, event_type):
 
 auto = pd.concat([fred_release_dates(rid, name) for rid, name in RELEASES.items()])
 
-# ---------- 2. COLLECT (manual + script-filled decisions) ----------
 manual_files = ["data/external/events_manual.csv", "data/interim/cb_decisions_auto.csv"]
 manual = pd.concat([pd.read_csv(f, dtype=str) for f in manual_files if os.path.exists(f)],
                    ignore_index=True)
 
-# ---------- 3. CLEAN ----------
 ALLOWED_TYPES = {"ecb_decision", "rbi_decision", "fomc_decision",
                  "us_cpi", "us_jobs", "india_budget", "india_election",
                  "us_election"}
@@ -80,7 +77,6 @@ def clean_events(df):
 
 events = clean_events(pd.concat([auto, manual], ignore_index=True))
 
-# ---------- 4. INSPECT ----------
 today = pd.Timestamp.today().normalize()
 past = events[events["date"] <= today]
 
