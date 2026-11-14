@@ -1,5 +1,4 @@
 from __future__ import annotations
-
 import csv
 import math
 import re
@@ -9,7 +8,7 @@ from pathlib import Path
 from xml.etree import ElementTree as ET
 from zipfile import ZipFile
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / 'data/raw/inflation/MOSPI_India_CPI_2024_Base_Historical_Through_2026.xlsx'
 OUTPUT = ROOT / 'data/interim/MOSPI_India_CPI_2024_Base_Historical_Through_2026_Clean.csv'
 REPORT = ROOT / 'reports/quality/MOSPI_India_CPI_2024_Base_Historical_Through_2026_Quality.csv'
@@ -34,7 +33,6 @@ CELL_RE = re.compile(r'^([A-Z]+)\d+$')
 
 
 def iter_excel_rows(path: Path):
-    """Stream values from this workbook's first worksheet without loading it all."""
     with ZipFile(path) as book:
         if SHEET_XML not in book.namelist():
             raise ValueError(f'Worksheet XML missing: {SHEET_XML}')
@@ -110,7 +108,6 @@ def main() -> None:
         if (raw.get('E') != 'All India' or raw.get('F') != 'Combined'
                 or raw.get('G') != 'CPI (General)'):
             continue
-        # Reject rows representing detailed categories rather than CPI (General).
         if any(raw.get(col, '') not in ('', None) for col in 'HIJKL'):
             continue
         selected_source_rows += 1

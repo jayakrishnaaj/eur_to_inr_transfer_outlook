@@ -1,7 +1,7 @@
 from pathlib import Path
 import pandas as pd
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 SOURCE = PROJECT_ROOT / "data" / "raw" / "currency" / "RBI_India_Reserve_Money_Components.xlsx"
 OUTPUT = PROJECT_ROOT / "data" / "interim" / "RBI_India_Reserve_Money_Components_Clean.csv"
 REPORT = PROJECT_ROOT / "reports" / "quality" / "RBI_India_Reserve_Money_Components_Quality.csv"
@@ -29,7 +29,6 @@ def parse_source_dates(values: pd.Series) -> pd.Series:
     result = pd.Series(pd.NaT, index=values.index, dtype="datetime64[ns]")
     numeric = pd.to_numeric(values, errors="coerce")
     serial_rows = numeric.notna() & ~values.map(lambda v: isinstance(v, (pd.Timestamp,)))
-    # Numeric source cells must represent plausible Excel calendar dates.
     if serial_rows.any():
         plausible = numeric.loc[serial_rows].between(20000, 80000)
         if not plausible.all():
@@ -56,7 +55,6 @@ def main() -> None:
     if not SOURCE.is_file():
         raise FileNotFoundError(f"Source workbook not found: {SOURCE}")
 
-    # Workbook: rows 1-7 contain titles/headers; data begins at row 8.
     raw = pd.read_excel(
         SOURCE,
         sheet_name=SHEET_NAME,
@@ -74,8 +72,6 @@ def main() -> None:
         raise ValueError("The RBI worksheet contains no rows after its headers")
 
     dates = parse_source_dates(raw["date"])
-    # Exclude empty lines and explicitly recognized explanatory/footer lines only.
-    # The RBI workbook includes a footer labelled "See Notes on Tables".
     source_text = raw["date"].astype("string").str.strip().fillna("")
     invalid_rows = dates.isna()
     recognized_notes = source_text.str.match(
@@ -94,8 +90,6 @@ def main() -> None:
     if data.empty:
         raise ValueError("No dated RBI observations found")
 
-    # Parentheses denote negative values in some Excel exports; negative
-    # amounts are permitted for net balance-sheet components.
     for col in COLUMNS[1:]:
         tokens = data[col].astype("string").str.strip()
         tokens = tokens.replace({"": pd.NA, "-": pd.NA, ".": pd.NA, "NA": pd.NA, "N/A": pd.NA})
@@ -128,7 +122,6 @@ def main() -> None:
     if data.empty:
         raise ValueError("No RBI observations within the selected study period")
 
-    # Gaps are informational: some RBI series have weekly or semi-monthly dates.
     gap_days = data["date"].diff().dt.days
     flagged_gaps = [
         f"{date:%Y-%m-%d} ({int(days)} days)"

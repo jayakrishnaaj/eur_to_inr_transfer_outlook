@@ -2,7 +2,7 @@ from pathlib import Path
 import pandas as pd
 
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 SOURCE = PROJECT_ROOT / "data/raw/currency/ECB_USD_INR_Exchange_Rate_Daily_2020_2026.csv"
 OUTPUT = PROJECT_ROOT / "data/interim/ECB_USD_INR_Exchange_Rate_Daily_2020_2026_Clean.csv"
 REPORT = PROJECT_ROOT / "reports/quality/ECB_USD_INR_Exchange_Rate_Daily_2020_2026_Quality.csv"
@@ -11,7 +11,6 @@ END_DATE = pd.Timestamp("2026-10-29")
 
 
 def main():
-    # Read all values as text to validate source formatting before conversion.
     raw = pd.read_csv(SOURCE, dtype="string", keep_default_na=False)
     required = ["date", "base", "quote", "rate"]
     missing_columns = set(required) - set(raw.columns)
@@ -26,7 +25,6 @@ def main():
     if not ((data["base"] == "USD") & (data["quote"] == "INR")).all():
         raise ValueError("Unexpected currency pair: expected USD -> INR on every row")
 
-    # Validate every source date; do not silently drop malformed dates.
     dates = pd.to_datetime(data["date"].str.strip(), format="%Y-%m-%d", errors="coerce")
     if dates.isna().any():
         raise ValueError(f"Found {int(dates.isna().sum())} invalid source dates")
@@ -34,7 +32,6 @@ def main():
     source_date_min = dates.min().date().isoformat()
     source_date_max = dates.max().date().isoformat()
 
-    # Keep valid missing-rate tokens missing; reject ambiguous numeric formats.
     rate_text = data["rate"].str.strip().replace(
         {"": pd.NA, ".": pd.NA, "-": pd.NA, "NA": pd.NA, "N/A": pd.NA}
     )
@@ -48,7 +45,6 @@ def main():
         raise ValueError("USD/INR rates must be positive")
     data["rate"] = rates.astype("float64")
 
-    # Remove identical duplicate-date records only; conflicting ones require review.
     duplicate_dates = int(data["date"].duplicated().sum())
     conflicts = data.groupby("date")["rate"].nunique(dropna=False).gt(1)
     if conflicts.any():
@@ -56,20 +52,17 @@ def main():
         raise ValueError(f"Conflicting USD/INR values for dates: {bad_dates}")
     data = data.sort_values("date").drop_duplicates("date", keep="first")
 
-    # Count excluded *unique* observations before applying the project date range.
     in_range = data["date"].between(START_DATE, END_DATE)
     out_of_range_observations = int((~in_range).sum())
     data = data.loc[in_range].copy().reset_index(drop=True)
     if data.empty:
         raise ValueError("No USD/INR observations remain within the requested date range")
 
-    # Flag calendar gaps and unusually large movements; do not fill or delete them.
     gap_days = data["date"].diff().dt.days
     long_gaps = [
         f"{day.date().isoformat()} ({int(length)} days)"
         for day, length in zip(data.loc[gap_days.gt(4), "date"], gap_days[gap_days.gt(4)])
     ]
-    # Changes between consecutive available observations (missing rates skipped).
     valid = data.loc[data["rate"].notna(), ["date", "rate"]].copy()
     changes = valid["rate"].diff().abs()
     median_change = changes.median()
@@ -87,7 +80,6 @@ def main():
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     clean.to_csv(OUTPUT, index=False, date_format="%Y-%m-%d", na_rep="")
 
-    # Store a human-readable quality report separately from the numeric dataset.
     report_rows = [
         {"metric": "dataset", "value": "Frankfurter ECB-provider USD/INR cross rate"},
         {"metric": "source", "value": str(SOURCE.relative_to(PROJECT_ROOT))},

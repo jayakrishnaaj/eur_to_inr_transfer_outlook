@@ -2,7 +2,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 SOURCE = PROJECT_ROOT / "data/raw/energy/FRED_Global_Brent_Crude_Oil_Price_Daily_2020_2026.csv"
 OUTPUT = PROJECT_ROOT / "data/interim/FRED_Global_Brent_Crude_Oil_Price_Daily_2020_2026_Clean.csv"
 REPORT = PROJECT_ROOT / "reports/quality/FRED_Global_Brent_Crude_Oil_Price_Daily_2020_2026_Quality.csv"

@@ -7,7 +7,7 @@ from datetime import date, timedelta
 from pathlib import Path
 from statistics import median
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 SOURCE = PROJECT_ROOT / 'data/raw/interest_rates/FRED_US_10Y_Treasury_Yield_Daily_2020_2026.csv'
 OUTPUT = PROJECT_ROOT / 'data/interim/FRED_US_10Y_Treasury_Yield_Daily_2020_2026_Clean.csv'
 REPORT = PROJECT_ROOT / 'reports/quality/FRED_US_10Y_Treasury_Yield_Daily_2020_2026_Quality.csv'
@@ -25,7 +25,6 @@ def parse_yield(token: str | None, line: int) -> float | None:
     raw = token.strip()
     if raw.upper() in MISSING_TOKENS:
         return None
-    # No forced positivity: negative yields are possible and should be flagged, not discarded.
     try:
         value = float(raw.replace(',', ''))
     except ValueError as exc:
@@ -80,8 +79,6 @@ def main() -> None:
     available = [(day, value) for day, value in filtered if value is not None]
     intervals = Counter((nxt[0] - current[0]).days for current, nxt in zip(filtered, filtered[1:]))
 
-    # Missing *rows* are distinguished from present rows with blank DGS10 values.
-    # DGS10 is a business-day series: weekends are not expected observations.
     present_dates = {day for day, _ in filtered}
     missing_weekday_rows = []
     day = first
@@ -90,8 +87,6 @@ def main() -> None:
             missing_weekday_rows.append(day.isoformat())
         day += timedelta(days=1)
 
-    # Compare successive available reported values. Changes may span a holiday or weekend;
-    # the detected date is the date of the new observation, not necessarily an overnight move.
     jumps = []
     jump_threshold = None
     if len(available) > 20:

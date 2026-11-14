@@ -5,11 +5,10 @@ from collections import Counter
 from datetime import date, datetime
 from pathlib import Path
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 SOURCE = PROJECT_ROOT / 'data/raw/interest_rates/RBI_India_Monetary_Policy_Rates.csv'
 EVENT_OUTPUT = PROJECT_ROOT / 'reports/quality/RBI_India_Monetary_Policy_Rates_Effective_Dates_Audit.csv'
 REPORT = PROJECT_ROOT / 'reports/quality/RBI_India_Monetary_Policy_Rates_Quality.csv'
-# Deliberately NOT generated: this source has no policy-rate observations.
 RATE_OUTPUT = PROJECT_ROOT / 'data/interim/RBI_India_Monetary_Policy_Rates_Clean.csv'
 START, END = date(2020, 1, 1), date(2026, 10, 29)
 EXPECTED = ['src_file', 'tab', 'period', 'row_no', 'c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8']
@@ -63,7 +62,7 @@ def main() -> None:
                 event_date = datetime.strptime(value, '%d-%m-%Y').date()
             except ValueError:
                 non_dated_rows += 1
-                continue  # Title, column headers, source notes, or blank rows.
+                continue 
             source_row = row['row_no'].strip()
             if not source_row.isdigit():
                 raise ValueError(f'Invalid original row number at CSV line {csv_line}: {source_row!r}')
@@ -123,8 +122,6 @@ def main() -> None:
         ('recommended_action', 'Use separately verified original RBI workbook and its daily repo-rate series; do not treat this dates-only CSV as independent numeric data'),
     ]
     write_metric_report(metrics)
-    # Avoid accidentally leaving an old, misleading output file from a prior run.
-    # Do NOT delete automatically: it might be a separately validated dataset.
     print(f'Raw rows: {raw_count}; dated source rows: {len(dated)}; in-period dates: {len(study)}')
     print(f'Numeric repo readings: {repo_count}; numeric rates in any column: {all_rate_count}')
     print(f'Effective-date audit: {EVENT_OUTPUT}')

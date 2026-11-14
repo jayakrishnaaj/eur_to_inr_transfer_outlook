@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 SOURCE = PROJECT_ROOT / "data" / "raw" / "energy" / "FRED_US_WTI_Crude_Oil_Price_Daily_2020_2026.csv"
 OUTPUT = PROJECT_ROOT / "data" / "interim" / "FRED_US_WTI_Crude_Oil_Price_Daily_2020_2026_Clean.csv"
 REPORT = PROJECT_ROOT / "reports" / "quality" / "FRED_US_WTI_Crude_Oil_Price_Daily_2020_2026_Quality.csv"
@@ -25,14 +25,12 @@ def main() -> None:
     if raw.empty:
         raise ValueError("Source CSV has no observations")
 
-    # Strict observation-date parsing: invalid or blank dates must be investigated.
     raw_dates = raw["observation_date"].str.strip()
     dates = pd.to_datetime(raw_dates, format="%Y-%m-%d", errors="coerce")
     if dates.isna().any():
         examples = raw_dates.loc[dates.isna()].head(5).tolist()
         raise ValueError(f"Unparseable observation dates: {examples}")
 
-    # Missing source markers remain missing; reject malformed and non-finite numbers.
     tokens = raw[SERIES_ID].str.strip()
     missing = tokens.str.upper().isin(MISSING_MARKERS)
     nonmissing = tokens.where(~missing, pd.NA)
@@ -44,7 +42,6 @@ def main() -> None:
         raise ValueError(f"Unexpected WTI price text: {tokens.loc[malformed].unique().tolist()[:5]}")
     if (~np.isfinite(values.dropna())).any():
         raise ValueError("Non-finite WTI prices (Infinity/-Infinity) found")
-    # No positive-price requirement: WTI spot prices can be zero or negative.
 
     data = pd.DataFrame({"date": dates, VALUE_COLUMN: values})
     duplicate_dates = int(data["date"].duplicated().sum())
@@ -67,7 +64,6 @@ def main() -> None:
     negative = valid.loc[valid[VALUE_COLUMN] < 0]
     zero = valid.loc[valid[VALUE_COLUMN] == 0]
 
-    # Flag calendar gaps; do not insert dates or fill values.
     intervals = data["date"].diff().dt.days
     gap_rows = data.loc[intervals.gt(4), "date"]
     long_gaps = [
@@ -75,7 +71,6 @@ def main() -> None:
         for idx, dt in gap_rows.items()
     ]
 
-    # Robust movement screen across consecutive nonmissing observations.
     differences = valid[VALUE_COLUMN].diff().abs().dropna()
     threshold = None
     jump_dates: list[str] = []

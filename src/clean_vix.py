@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 SOURCE = PROJECT_ROOT / "data" / "raw" / "currency" / "CBOE_US_VIX_Volatility_Index.csv"
 OUTPUT = PROJECT_ROOT / "data" / "interim" / "CBOE_US_VIX_Volatility_Index_Clean.csv"
 REPORT = PROJECT_ROOT / "reports" / "quality" / "CBOE_US_VIX_Volatility_Index_Quality.csv"
@@ -22,7 +22,6 @@ def main() -> None:
     if not SOURCE.is_file():
         raise FileNotFoundError(f"Source CSV not found: {SOURCE}")
 
-    # Load source observations as text; do not silently reinterpret missing values.
     raw = pd.read_csv(SOURCE, dtype="string", keep_default_na=False)
     if raw.columns.tolist() != SOURCE_COLUMNS:
         raise ValueError(f"Unexpected source columns: {raw.columns.tolist()}")
@@ -30,14 +29,12 @@ def main() -> None:
         raise ValueError("The VIX source CSV contains no observations")
     raw_rows = len(raw)
 
-    # Validate observation dates before removing any rows.
     dates = pd.to_datetime(
         raw["observation_date"].str.strip(), format="%Y-%m-%d", errors="coerce"
     )
     if dates.isna().any():
         raise ValueError(f"Invalid observation dates: {int(dates.isna().sum())}")
 
-    # Preserve legitimate missing observations rather than filling them.
     text_values = raw["VIXCLS"].str.strip()
     missing = text_values.str.upper().isin(MISSING_TOKENS)
     numeric = pd.to_numeric(text_values.mask(missing), errors="coerce")
@@ -54,7 +51,6 @@ def main() -> None:
 
     data = pd.DataFrame({"date": dates, VALUE_COLUMN: numeric.astype("float64")})
 
-    # Reject conflicting duplicate records; remove identical duplicates only.
     duplicate_dates = int(data["date"].duplicated().sum())
     conflicts = data.groupby("date")[VALUE_COLUMN].nunique(dropna=False).gt(1)
     if conflicts.any():
@@ -65,14 +61,12 @@ def main() -> None:
     source_date_min = data["date"].min().date().isoformat()
     source_date_max = data["date"].max().date().isoformat()
 
-    # Retain only the selected study period and count excluded observations.
     in_period = data["date"].between(START_DATE, END_DATE)
     out_of_range = int((~in_period).sum())
     data = data.loc[in_period, ["date", VALUE_COLUMN]].reset_index(drop=True)
     if data.empty:
         raise ValueError("No VIX observations within the selected study period")
 
-    # Calendar gaps and movements are review flags, not removal conditions.
     day_gaps = data["date"].diff().dt.days
     long_gaps = [
         f"{day:%Y-%m-%d} ({int(days)} days)"
@@ -93,13 +87,11 @@ def main() -> None:
         else []
     )
 
-    # Export the clean, numeric-only dataset.
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     REPORT.parent.mkdir(parents=True, exist_ok=True)
     FIGURE.parent.mkdir(parents=True, exist_ok=True)
     data.to_csv(OUTPUT, index=False, date_format="%Y-%m-%d", na_rep="")
 
-    # Match the project's standard metric/value quality report format.
     missing_count = int(data[VALUE_COLUMN].isna().sum())
     report_rows = [
         {"metric": "dataset", "value": "Cboe VIX daily close (FRED VIXCLS)"},
@@ -134,7 +126,6 @@ def main() -> None:
         REPORT, index=False, encoding="utf-8"
     )
 
-    # Plot observed closes without interpolating missing observations.
     fig, ax = plt.subplots(figsize=(11, 4))
     ax.plot(data["date"], data[VALUE_COLUMN], linewidth=1)
     ax.set(

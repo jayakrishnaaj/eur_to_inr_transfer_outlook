@@ -3,7 +3,7 @@ from pathlib import Path
 import re
 import pandas as pd
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 SOURCE = PROJECT_ROOT / "data/raw/currency/RBI_India_Forex_Reserves_Weekly.xlsx"
 OUTPUT = PROJECT_ROOT / "data/interim/RBI_India_Forex_Reserves_Weekly_Clean.csv"
 REPORT = PROJECT_ROOT / "reports/quality/RBI_India_Forex_Reserves_Weekly_Quality.csv"
@@ -27,8 +27,6 @@ COLUMNS = [
     "rbi_imf_reserve_tranche_usd_mn",
 ]
 
-# Only unambiguous textual date formats are accepted. Add a format if the
-# actual RBI workbook uses a different documented convention.
 TEXT_DATE_FORMATS = (
     "%Y-%m-%d", "%d-%b-%Y", "%d-%B-%Y", "%d %b %Y", "%d %B %Y",
     "%d/%m/%Y", "%d.%m.%Y", "%Y/%m/%d",
@@ -37,7 +35,6 @@ MISSING_TOKENS = {"", "-", ".", "NA", "N/A", "NAN", "NULL"}
 
 
 def parse_source_date(value):
-    """Parse Excel dates, plausible Excel serials and supported text dates."""
     if value is None or pd.isna(value):
         return pd.NaT
     if isinstance(value, (pd.Timestamp, datetime, date)):
@@ -61,7 +58,6 @@ def parse_source_date(value):
 
 
 def parse_number(value, excel_row, column):
-    """Retain missing cells; validate all other numeric values."""
     if value is None or pd.isna(value):
         return float("nan")
     if isinstance(value, bool):
@@ -83,17 +79,13 @@ def parse_number(value, excel_row, column):
 
 
 def is_metadata_row(row):
-    """Recognize headings/footers; never hide rows with plausible measurements."""
     first = "" if pd.isna(row.iloc[0]) else str(row.iloc[0]).strip()
     fields = row.iloc[1:]
-    # Known RBI title, year-label and footer patterns.
     known_heading = bool(re.match(
         r"(?i)^(?:notes?\b|see\s+notes\b|source\b|table\b|foreign\s+exchange\b|"
         r"financial\s+year\b|year\b|as\s+on\b|week\s+ended\b|date\b|"
         r"\*|\d{4}\s*[-–/]\s*\d{2,4}\b)", first
     ))
-    # Non-observation rows without numeric measurements may be titles or footers.
-    # But nonblank unrecognized dates beside measurement-like cells are errors.
     has_measurements = False
     for value in fields:
         if pd.isna(value) or str(value).strip().upper() in MISSING_TOKENS:
@@ -111,7 +103,6 @@ def main():
     if not SOURCE.is_file():
         raise FileNotFoundError(f"Source workbook not found: {SOURCE}")
 
-    # Read the entire populated sheet; fixed row limits can silently omit updates.
     raw = pd.read_excel(
         SOURCE, sheet_name=SHEET_NAME, header=None, usecols="B:N",
         dtype=object, engine="openpyxl",

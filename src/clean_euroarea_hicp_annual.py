@@ -3,12 +3,12 @@ import math
 import re
 import pandas as pd
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 SOURCE = PROJECT_ROOT / "data/raw/inflation/Eurostat_EuroArea_HICP_Inflation_Annual_2020_2026.xlsx"
 OUTPUT = PROJECT_ROOT / "data/interim/Eurostat_EuroArea_HICP_Inflation_Annual_2020_2026_Clean.csv"
 REPORT = PROJECT_ROOT / "reports/quality/Eurostat_EuroArea_HICP_Inflation_Annual_2020_2026_Quality.csv"
 START_DATE = pd.Timestamp("2020-01-01")
-END_DATE = pd.Timestamp("2026-10-01")  # October is inclusive when in the workbook.
+END_DATE = pd.Timestamp("2026-10-01") 
 SHEET_NAME = "Sheet 1"
 VALUE_COLUMN = "euroarea_hicp_annual_inflation_pct"
 MISSING_MARKERS = {"", ":", "-", ".", "NA", "N/A", "NULL", "NAN"}
@@ -18,7 +18,6 @@ GEOGRAPHY_PREFIX = "Euro area (EA11-1999,"
 
 
 def parse_rate(value: object, period: str) -> float:
-    """Parse an annual percentage rate; negative inflation is legitimate."""
     if value is None or pd.isna(value):
         return float("nan")
     if isinstance(value, bool):
@@ -42,8 +41,6 @@ def main() -> None:
     if not SOURCE.is_file():
         raise FileNotFoundError(f"Source workbook not found: {SOURCE}")
 
-    # Workbook layout supplied by the source: measure metadata in rows 5–7,
-    # monthly period labels on row 9, and geographic series in subsequent rows.
     raw = pd.read_excel(
         SOURCE,
         sheet_name=SHEET_NAME,
@@ -72,9 +69,6 @@ def main() -> None:
     row_idx = geography_rows[0]
     source_geography = cell_text(raw.iat[row_idx, 0])
 
-    # Eurostat spreadsheet alternates observation and flag columns. Validate
-    # that every selected monthly header occurs once and flag columns do not
-    # inadvertently get interpreted as independent observations.
     months = {}
     for col_idx, header in enumerate(raw.iloc[8]):
         label = cell_text(header)
@@ -96,8 +90,6 @@ def main() -> None:
     for month in chosen:
         col_idx = months[month]
         rate = parse_rate(raw.iat[row_idx, col_idx], month)
-        # A flag belongs to the observation immediately to its left. Only
-        # inspect it when that adjacent column is not another period column.
         flag = ""
         if col_idx + 1 < raw.shape[1] and col_idx + 1 not in months.values():
             flag = cell_text(raw.iat[row_idx, col_idx + 1])

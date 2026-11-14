@@ -7,7 +7,7 @@ import re
 import pandas as pd
 from openpyxl import load_workbook
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 SOURCE = PROJECT_ROOT / 'data/raw/inflation/MOSPI_India_CPI_2012_Base_Current_2026.xlsx'
 OUTPUT = PROJECT_ROOT / 'data/interim/MOSPI_India_CPI_2012_Base_Current_2026_Clean.csv'
 REPORT = PROJECT_ROOT / 'reports/quality/MOSPI_India_CPI_2012_Base_Current_2026_Quality.csv'
@@ -28,7 +28,6 @@ NUMBER_RE = re.compile(r'[+-]?(?:\d+(?:\.\d*)?|\.\d+)\Z')
 
 
 def parse_number(value: object, row_number: int, field: str) -> float:
-    """Preserve missing readings; reject ambiguous or non-finite values."""
     if value is None:
         return math.nan
     if isinstance(value, bool):
@@ -150,7 +149,7 @@ def main() -> None:
     pd.DataFrame(report_rows, columns=['metric','value']).to_csv(REPORT, index=False, encoding='utf-8')
     if clean.empty:
         if OUTPUT.exists():
-            OUTPUT.unlink()  # avoid leaving a stale processed dataset
+            OUTPUT.unlink()  
         raise ValueError(f'No observations within study period. Quality report: {REPORT}')
 
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)

@@ -8,13 +8,13 @@ from pathlib import Path
 from xml.etree import ElementTree as ET
 from zipfile import ZipFile
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 SOURCE = PROJECT_ROOT / 'data/raw/interest_rates/RBI_India_Monetary_Policy_Rates_And_Reserve_Requirements.xlsx'
 OUTPUT = PROJECT_ROOT / 'data/interim/RBI_India_Monetary_Policy_Rates_And_Reserve_Requirements_Clean.csv'
 EVENT_OUTPUT = PROJECT_ROOT / 'reports/quality/RBI_India_Monetary_Policy_Rates_And_Reserve_Requirements_source_events.csv'
 REPORT = PROJECT_ROOT / 'reports/quality/RBI_India_Monetary_Policy_Rates_And_Reserve_Requirements_Quality.csv'
 START, END = date(2020, 1, 1), date(2026, 10, 29)
-SHEET_XML = 'xl/worksheets/sheet1.xml'  # Verified: workbook's 'Report 1' worksheet
+SHEET_XML = 'xl/worksheets/sheet1.xml'
 NS = '{http://schemas.openxmlformats.org/spreadsheetml/2006/main}'
 MISSING = {'', '-', '.', 'NA', 'N/A', 'NULL'}
 
@@ -33,7 +33,7 @@ def excel_date(token: str, row: int) -> date:
 def repo_rate(token: str, row: int) -> float | None:
     text = str(token).strip()
     if text.upper() in MISSING:
-        return None  # RBI note: '-' indicates no change; NOT a missing daily state.
+        return None 
     try:
         rate = float(text)
     except ValueError as exc:
@@ -44,7 +44,6 @@ def repo_rate(token: str, row: int) -> float | None:
 
 
 def source_rows(path: Path):
-    """Read workbook without loading the whole XLSX or requiring artifact_tool."""
     with ZipFile(path) as archive:
         names = set(archive.namelist())
         if SHEET_XML not in names:
@@ -138,7 +137,6 @@ def main() -> None:
         ledger.append({**event, 'previous_rate': prev_rate, 'changed': change})
         prev_rate = event['rate']
 
-    # Full source event audit, including the historical event used to establish initial state.
     EVENT_OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     with EVENT_OUTPUT.open('w', newline='', encoding='utf-8') as handle:
         writer = csv.writer(handle)

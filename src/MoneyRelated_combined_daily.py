@@ -1,4 +1,3 @@
-"""Combining the money related csv togeter after changing the data to daily"""
 from __future__ import annotations
 import argparse
 import re
@@ -51,7 +50,6 @@ PREFIXES = {
 
 
 def slug(value: object) -> str:
-    """Sanitize labels while preserving distinguishing names."""
     s = str(value).strip().lower()
     return re.sub(r"[^a-z0-9]+", "_", s).strip("_") or "na"
 
@@ -88,7 +86,6 @@ def cpi_filter(frame: pd.DataFrame, base: int, detail: str) -> pd.DataFrame:
 
 
 def load_cpi(path: Path, detail: str) -> pd.DataFrame:
-    """Read giant long-form CPI files in chunks, then pivot safely by dimensions."""
     filename = path.name
     prefix = PREFIXES[filename]
     base = 2012 if "2012_Base" in filename else 2024
@@ -96,7 +93,6 @@ def load_cpi(path: Path, detail: str) -> pd.DataFrame:
             ["base_year", "series", "state", "sector", "division", "group",
              "class", "sub_class", "item", "code"])
     value_cols = ["index", "inflation"]
-    # Keep the data useful for modelling: status/imputation are metadata, not rates.
     pieces = []
     for chunk in pd.read_csv(path, chunksize=100_000, low_memory=False):
         required = ["date", *dims, *value_cols]
@@ -116,8 +112,6 @@ def load_cpi(path: Path, detail: str) -> pd.DataFrame:
         values = unique_date_index(values, filename)
         return values.rename(columns={v: f"{prefix}_{v}" for v in value_cols})
 
-    # Each dimension tuple is its own feature. Never accidentally take the
-    # first of distinct series sharing a date.
     for col in dims:
         raw[col] = raw[col].astype("string").fillna("na").str.strip()
     raw["series_key"] = raw[dims].agg("|".join, axis=1)
@@ -125,7 +119,6 @@ def load_cpi(path: Path, detail: str) -> pd.DataFrame:
         bad = raw.loc[raw.duplicated(["date", "series_key"], keep=False),
                       ["date", "series_key"]].head(5)
         raise ValueError(f"Duplicate CPI date/dimension in {filename}:\n{bad}")
-    # Pivot one feature at a time to limit peak memory.
     outputs = []
     for metric in value_cols:
         wide = raw.pivot(index="date", columns="series_key", values=metric)
@@ -137,7 +130,6 @@ def load_cpi(path: Path, detail: str) -> pd.DataFrame:
 
 
 def load_eurostat(path: Path) -> pd.DataFrame:
-    """Eurostat has a row per geography and date; pivot geography into columns."""
     filename = path.name
     prefix = PREFIXES[filename]
     df = checked_dates(pd.read_csv(path, low_memory=False), filename)
@@ -153,14 +145,11 @@ def load_eurostat(path: Path) -> pd.DataFrame:
 def load_regular(path: Path, is_daily: bool) -> pd.DataFrame:
     filename = path.name
     df = pd.read_csv(path, low_memory=False)
-    # 'observation_date' is provenance metadata, not a model indicator;
-    # retain source values without duplicate observation-date columns.
     df = df.drop(columns=["observation_date"], errors="ignore")
     df = unique_date_index(df, filename)
     if is_daily:
         prefix = PREFIXES[filename]
         df = df.rename(columns={c: f"{prefix}_{slug(c)}" for c in df.columns})
-    # Existing cleaned names are already descriptive; keep them unchanged.
     return df
 
 
@@ -181,7 +170,6 @@ def main() -> None:
     for filename in DAILY_FILES:
         path = interim / "daily" / filename
         if not path.is_file():
-            # Accommodate older interim folder layouts without moving files.
             path = interim / filename
         located.append((filename, path, True))
     for filename in CLEAN_FILES:
@@ -208,14 +196,11 @@ def main() -> None:
         frames.append(df)
         print(f"[{number:02d}/24] {filename}: {len(df):,} dates, {len(df.columns):,} features")
 
-    # Join on dates (not by row number). Different sources have different date ranges.
     combined = pd.concat(frames, axis=1, join="outer").sort_index()
     begin = pd.Timestamp(args.start) if args.start else combined.index.min()
     finish = pd.Timestamp(args.end) if args.end else combined.index.max()
     if begin > finish:
         raise ValueError("--start must be on or before --end")
-    # Reindex before forward filling, so earlier observations remain available
-    # when the user chooses a later start date. Never backfill into the past.
     idx = pd.date_range(min(begin, combined.index.min()), finish, freq="D", name="date")
     combined = combined.reindex(idx).ffill().loc[begin:finish]
     if not combined.index.is_unique or not combined.columns.is_unique:
@@ -224,7 +209,7 @@ def main() -> None:
     combined.to_csv(output, index_label="date", date_format="%Y-%m-%d")
     print(f"\nSUCCESS: {output}\nSource files: 24\nDaily rows: {len(combined):,}"
           f"\nDistinct features: {len(combined.columns):,}\nNo duplicate dates or columns.")
-    print("NOTE: Values use observation dates, not confirmed publication dates.")
+    print("Values use observation dates, not confirmed publication dates.")
 
 
 if __name__ == "__main__":

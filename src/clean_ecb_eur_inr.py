@@ -1,7 +1,7 @@
 from pathlib import Path
 import pandas as pd
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 SOURCE = PROJECT_ROOT / "data/raw/currency/ECB_EUR_INR_Exchange_Rate_Daily_2020_2026.csv"
 OUTPUT = PROJECT_ROOT / "data/interim/ECB_EUR_INR_Exchange_Rate_Daily_2020_2026_Clean.csv"
 REPORT = PROJECT_ROOT / "reports/quality/ECB_EUR_INR_Exchange_Rate_Daily_2020_2026_Quality.csv"
@@ -10,7 +10,6 @@ END_DATE = pd.Timestamp("2026-10-29")
 
 
 def main():
-    # Read as text first so malformed values cannot be silently misinterpreted.
     raw = pd.read_csv(SOURCE, dtype="string", keep_default_na=False)
     required = {"date", "base", "quote", "rate"}
     if not required.issubset(raw.columns):
@@ -28,7 +27,6 @@ def main():
     data["date"] = dates
 
     tokens = data["rate"].str.strip().replace({"": pd.NA, ".": pd.NA, "-": pd.NA})
-    # Source uses decimal point; commas would be ambiguous, so reject them.
     if tokens.dropna().str.contains(",", regex=False).any():
         raise ValueError("Comma-formatted rate found: inspect source convention before parsing")
     rates = pd.to_numeric(tokens, errors="coerce")
@@ -39,7 +37,6 @@ def main():
         raise ValueError("EUR/INR exchange rates must be positive")
     data["rate"] = rates.astype("float64")
 
-    # Identical dates may be collapsed, but disagreeing values must be investigated.
     duplicates_in_raw = int(data["date"].duplicated().sum())
     conflicts = data.groupby("date")["rate"].nunique(dropna=False) > 1
     if conflicts.any():
@@ -107,7 +104,6 @@ def main():
         encoding="utf-8"
     )
 
-    # Console summary.
     print(f"Saved {OUTPUT.relative_to(PROJECT_ROOT)} ({len(clean)} rows)")
     print(f"Duplicates removed: {duplicates_in_raw}")
     print(f"Missing rates preserved: {clean['eur_inr_inr_per_eur'].isna().sum()}")
