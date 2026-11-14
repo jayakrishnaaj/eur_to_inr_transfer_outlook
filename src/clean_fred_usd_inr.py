@@ -2,7 +2,7 @@ from pathlib import Path
 import re
 import pandas as pd
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 SOURCE = PROJECT_ROOT / "data" / "raw" / "currency" / "FRED_USD_INR_Exchange_Rate_Daily_2020_2026.csv"
 OUTPUT = PROJECT_ROOT / "data" / "interim" / "FRED_USD_INR_Exchange_Rate_Daily_2020_2026_Clean.csv"
 REPORT = PROJECT_ROOT / "reports" / "quality" / "FRED_USD_INR_Exchange_Rate_Daily_2020_2026_Quality.csv"
@@ -19,7 +19,6 @@ def main() -> None:
     if not SOURCE.is_file():
         raise FileNotFoundError(f"FRED source file not found: {SOURCE}")
 
-    # Read as strings so unexpected values are detectable before conversion.
     raw = pd.read_csv(SOURCE, dtype="string", keep_default_na=False)
     if set(raw.columns) != set(EXPECTED_COLUMNS) or len(raw.columns) != len(EXPECTED_COLUMNS):
         raise ValueError(f"Unexpected FRED columns: {raw.columns.tolist()}; expected {EXPECTED_COLUMNS}")
@@ -39,7 +38,6 @@ def main() -> None:
 
     rate_text = data[SOURCE_VALUE_COLUMN].str.strip()
     missing = rate_text.str.upper().isin(MISSING_TOKENS)
-    # Do not strip commas; source numeric conventions must be checked explicitly.
     numeric = pd.to_numeric(rate_text.mask(missing), errors="coerce")
     bad_numeric = ~missing & numeric.isna()
     if bad_numeric.any():
@@ -47,14 +45,12 @@ def main() -> None:
             "Unexpected FRED numeric value(s): "
             f"{rate_text.loc[bad_numeric].unique().tolist()[:5]}"
         )
-    # Both nonpositive and infinite values are invalid for an exchange rate.
     if (~numeric.dropna().map(lambda x: float('-inf') < x < float('inf'))).any():
         raise ValueError("Non-finite USD/INR exchange rate found")
     if (numeric.dropna() <= 0).any():
         raise ValueError("Nonpositive USD/INR exchange rate found")
     data[CLEAN_VALUE_COLUMN] = numeric.astype("float64")
 
-    # Conflicting duplicates require investigation; identical copies can be removed.
     duplicate_dates = int(data["date"].duplicated().sum())
     conflicts = data.groupby("date")[CLEAN_VALUE_COLUMN].nunique(dropna=False).gt(1)
     if conflicts.any():
@@ -73,7 +69,6 @@ def main() -> None:
     if clean.empty:
         raise ValueError("No FRED USD/INR observations in the study period")
 
-    # Calendar gaps and large jumps are signals for review, never deletions.
     calendar_days = clean["date"].diff().dt.days
     long_gaps = [
         f"{day:%Y-%m-%d} ({int(gap)} days)"

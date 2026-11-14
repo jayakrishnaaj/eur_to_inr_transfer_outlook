@@ -4,7 +4,7 @@ import math
 from datetime import date, timedelta
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / 'data/raw/interest_rates/FRED_EuroArea_ECB_Deposit_Facility_Rate_2020_2026.csv'
 OUTPUT = ROOT / 'data/interim/FRED_EuroArea_ECB_Deposit_Facility_Rate_2020_2026_Clean.csv'
 REPORT = ROOT / 'reports/quality/FRED_EuroArea_ECB_Deposit_Facility_Rate_2020_2026_Quality.csv'
@@ -16,7 +16,6 @@ MISSING_TOKENS = {'', '.', '-', 'NA', 'N/A', 'NULL', 'NAN'}
 
 
 def parse_rate(token: str | None, row_number: int) -> float | None:
-    """Preserve missing observations and allow negative or zero rates."""
     text = '' if token is None else str(token).strip()
     if text.upper() in MISSING_TOKENS:
         return None
@@ -82,8 +81,6 @@ def main() -> None:
         if rate is None:
             continue
         if previous_valid_rate is not None and rate != previous_valid_rate:
-            # Rate changes after missing observations are not proven to have
-            # happened on this day: flag them separately in the report.
             changes.append((day, previous_valid_rate, rate, rate - previous_valid_rate))
         previous_valid_rate = rate
         previous_valid_date = day

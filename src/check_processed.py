@@ -1,22 +1,9 @@
-"""
-Quick quality check of every cleaned table before merging.
-
-Usage:
-    python check_processed.py                 # checks data/processed/*.csv
-    python check_processed.py path/to/folder  # or another folder / single file
-
-For each CSV it reports: date range, duplicate or unreadable dates, gaps,
-missing values per column, columns that aren't numeric, and suspicious jumps.
-Ends with READY or CHECK for each file.
-"""
-
 import sys
 from pathlib import Path
-
 import pandas as pd
 
 DATE_NAMES = ("date", "week_start", "reporting_date", "week_end")
-TEXT_OK = ("_period", "source", "_obs_date", "week_end")   # text/date columns that are fine
+TEXT_OK = ("_period", "source", "_obs_date", "week_end")   
 
 
 def check(path: Path) -> bool:
@@ -24,7 +11,7 @@ def check(path: Path) -> bool:
     print(f"\n=== {path.name}  ({len(df)} rows, {df.shape[1]} columns)")
     problems = []
 
-    # 1) date column
+
     dcol = next((c for c in df.columns if c.lower() in DATE_NAMES), df.columns[0])
     dates = pd.to_datetime(df[dcol], errors="coerce")
     bad = dates.isna().sum()
@@ -40,13 +27,11 @@ def check(path: Path) -> bool:
     step = int(d.diff().dt.days.mode().iloc[0]) if len(d) > 1 else 0
     freq = {1: "daily", 7: "weekly"}.get(step, f"every {step} days")
     print(f"  dates: '{dcol}' {d.min():%Y-%m-%d} .. {d.max():%Y-%m-%d} ({freq})")
-    # allowed spacing: daily trading data skips weekends + holidays (up to 4 days)
     allowed = {1: 4, 7: 7}.get(step, step * 1.5)
     gaps = d[d.diff().dt.days > allowed]
     if len(gaps):
         problems.append(f"{len(gaps)} gaps in the dates, e.g. before {gaps.iloc[0]:%Y-%m-%d}")
 
-    # 2) columns: type, missing values, jumps
     rows = []
     for c in df.columns:
         if c == dcol:

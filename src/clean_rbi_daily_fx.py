@@ -2,7 +2,7 @@ from pathlib import Path
 import json
 import pandas as pd
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 SOURCE = PROJECT_ROOT / "data" / "raw" / "currency" / "RBI_INR_Exchange_Rates_Daily.xlsx"
 DEST = PROJECT_ROOT / "data" / "interim" / "RBI_INR_Exchange_Rates_Daily_Clean.csv"
 REPORT = PROJECT_ROOT / "reports" / "quality" / "RBI_INR_Exchange_Rates_Daily_Quality.csv"
@@ -19,7 +19,6 @@ raw = pd.read_excel(
     engine="openpyxl"
 )
 
-# Validate the headers already detected by Pandas.
 expected = [
     'Date',
     'US Dollar',
@@ -35,7 +34,6 @@ if raw.columns.tolist() != expected:
         f'Unexpected RBI columns: {raw.columns.tolist()}'
     )
 
-# Remove the numbering row (1, 2, 3, 4, 5).
 numbering_row = raw.iloc[0].str.strip().tolist()
 
 if numbering_row != ['1', '2', '3', '4', '5']:
@@ -45,7 +43,6 @@ if numbering_row != ['1', '2', '3', '4', '5']:
 
 source = raw.iloc[1:].copy()
 
-# Assign standardized internal column names.
 source.columns = [
     'date_raw',
     'usd_raw',
@@ -55,19 +52,16 @@ source.columns = [
 ]
 
 
-# Parse Excel dates.
 source['date'] = pd.to_datetime(
     source['date_raw'].str.strip(),
     errors='coerce'
 )
 
-# Identify non-observation rows.
 invalid_rows = source[
     source['date'].isna() &
     source['date_raw'].str.strip().ne('')
 ].copy()
 
-# RBI explanatory notes are metadata, not observations.
 notes_rows = invalid_rows[
     invalid_rows['date_raw'].str.strip().str.startswith(
         'Notes :',
@@ -75,7 +69,6 @@ notes_rows = invalid_rows[
     )
 ]
 
-# Reject any unexpected non-date rows.
 unexpected_rows = invalid_rows.drop(notes_rows.index)
 
 if not unexpected_rows.empty:
@@ -84,13 +77,11 @@ if not unexpected_rows.empty:
         f'{unexpected_rows["date_raw"].tolist()}'
     )
 
-# Retain actual observations from the project start date.
 source = source.loc[
     source['date'].notna() &
     source['date'].ge(START)
 ].copy()
 
-# Record the number of explanatory rows excluded.
 excluded_notes_rows = len(notes_rows)
 if source.empty:
     raise ValueError(
@@ -113,7 +104,6 @@ for original, clean in rename.items():
 
 cols = list(rename.values())
 source = source[['date'] + cols].sort_values('date')
-# Dates with identical values may be deduplicated. Conflicting rows require investigation.
 duplicate_dates = int(source.duplicated('date').sum())
 conflicts = source.groupby('date')[cols].nunique(dropna=False).gt(1).any(axis=1)
 if conflicts.any():

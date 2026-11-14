@@ -9,7 +9,7 @@ from pathlib import Path
 from xml.etree import ElementTree as ET
 from zipfile import ZipFile
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / 'data/raw/inflation/MOSPI_India_CPI_2024_Base_Historical_Through_2026.xlsx'
 OUTPUT = ROOT / 'data/interim/MOSPI_India_CPI_2024_Base_Historical_Through_2026.csv'
 REPORT = ROOT / 'reports/quality/MOSPI_India_CPI_2024_Base_Historical_Through_2026.csv'
@@ -29,7 +29,6 @@ def iter_excel_rows(path: Path):
     with ZipFile(path) as book:
         if SHEET_XML not in book.namelist():
             raise ValueError(f'Expected worksheet XML missing: {SHEET_XML}')
-        # Important: this particular export uses inline cell values, no shared strings.
         if 'xl/sharedStrings.xml' in book.namelist():
             raise ValueError('Unexpected shared-string table; review export parser')
         with book.open(SHEET_XML) as handle:
@@ -164,7 +163,6 @@ def main():
         'coverage_warning': 'This Back workbook ends December 2024; 2025–2026 require a separate source.',
         'base_year_warning': 'Do not directly concatenate 2012-base and 2024-base CPI index levels.'
     }
-    # Save quality report as CSV
     with REPORT.open('w', newline='', encoding='utf-8') as f:
         writer = csv.writer(f)
         writer.writerow(['metric', 'value'])

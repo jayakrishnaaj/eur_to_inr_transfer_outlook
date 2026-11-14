@@ -6,7 +6,7 @@ from pathlib import Path
 import pandas as pd
 from openpyxl import load_workbook
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 SOURCE = PROJECT_ROOT / "data/raw/inflation/Eurostat_EuroArea_HICP_Inflation_Monthly_2020_2026.xlsx"
 OUTPUT = PROJECT_ROOT / "data/interim/Eurostat_EuroArea_HICP_Inflation_Monthly_2020_2026_Clean.csv"
 REPORT = PROJECT_ROOT / "reports/quality/Eurostat_EuroArea_HICP_Inflation_Monthly_2020_2026_Quality.csv"
@@ -20,7 +20,6 @@ GEO_PREFIX = "Euro area (EA11-1999,"
 
 
 def parse_number(value: object, period: str) -> float:
-    """Return NaN for declared missing markers; reject ambiguous numbers."""
     if value is None or (not isinstance(value, str) and pd.isna(value)):
         return math.nan
     if isinstance(value, bool):
@@ -31,13 +30,12 @@ def parse_number(value: object, period: str) -> float:
         token = str(value).strip()
         if token.upper() in MISSING_TOKENS:
             return math.nan
-        # Do not silently reinterpret comma decimal conventions or annotations.
         if not re.fullmatch(r"[+-]?(?:\d+(?:\.\d*)?|\.\d+)", token):
             raise ValueError(f"Unexpected HICP numeric text for {period}: {value!r}")
         parsed = float(token)
     if not math.isfinite(parsed):
         raise ValueError(f"Non-finite HICP value for {period}: {value!r}")
-    return parsed  # Negative monthly inflation values are legitimate.
+    return parsed  
 
 
 def month_labels(start: pd.Timestamp, end: pd.Timestamp) -> list[str]:
@@ -48,7 +46,6 @@ def main() -> None:
     if not SOURCE.is_file():
         raise FileNotFoundError(f"Source workbook not found: {SOURCE}")
 
-    # Read the worksheet through openpyxl (available from PyPI).
     workbook = load_workbook(SOURCE, read_only=False, data_only=True)
     try:
         if SHEET_NAME not in workbook.sheetnames:
@@ -56,9 +53,6 @@ def main() -> None:
                 f"Missing worksheet {SHEET_NAME!r}; available sheets: {workbook.sheetnames}"
             )
         sheet = workbook[SHEET_NAME]
-        # Use normal (non-read-only) mode: some Eurostat exports have
-        # inaccurate worksheet dimensions, causing read-only iteration
-        # to omit rows. No arbitrary minimum row count is assumed.
         rows = list(sheet.iter_rows(values_only=True))
     finally:
         workbook.close()
@@ -108,7 +102,6 @@ def main() -> None:
             raise ValueError(f"Missing source cell for period {period}")
         value = parse_number(selected[index], period)
         observations.append({"date": observation_date, VALUE_COLUMN: value})
-        # Only treat the next cell as a flag when it is NOT another time column.
         if index + 1 < len(selected):
             next_label = str(header[index + 1]).strip() if index + 1 < len(header) else ""
             flag = selected[index + 1]
@@ -130,7 +123,6 @@ def main() -> None:
     recorded_months = set(data["date"].dt.strftime("%Y-%m"))
     missing_months = [month for month in month_labels(START_DATE, END_DATE) if month not in recorded_months]
     values = data[VALUE_COLUMN].dropna()
-    # Changes are calculated only between adjacent observed calendar months with values.
     period_step = data["date"].dt.to_period("M").astype("int64").diff()
     change = data[VALUE_COLUMN].diff().abs().where(period_step.eq(1))
     valid_changes = change.dropna()

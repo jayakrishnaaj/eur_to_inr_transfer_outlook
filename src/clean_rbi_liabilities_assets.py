@@ -3,7 +3,7 @@ from pathlib import Path
 import re
 import pandas as pd
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 SOURCE = PROJECT_ROOT / "data/raw/currency/RBI_India_Central_Bank_Balance_Sheet.xlsx"
 OUTPUT = PROJECT_ROOT / "data/interim/RBI_India_Central_Bank_Balance_Sheet_Clean.csv"
 REPORT = PROJECT_ROOT / "reports/quality/RBI_India_Central_Bank_Balance_Sheet_Quality.csv"
@@ -11,7 +11,6 @@ START_DATE = pd.Timestamp("2020-01-01")
 END_DATE = pd.Timestamp("2026-10-29")
 SHEET_NAME = "Report 1"
 
-# B:AF contains the date plus 30 financial series, in their original order.
 COLUMNS = [
     "date",
     "rbi_notes_issued_inr_crore",
@@ -54,7 +53,6 @@ TEXT_DATE_FORMATS = (
 
 
 def parse_source_date(value):
-    """Accept date cells, plausible Excel serials, and explicit date formats."""
     if value is None or pd.isna(value) or isinstance(value, bool):
         return pd.NaT
     if isinstance(value, (pd.Timestamp, datetime, date)):
@@ -75,7 +73,6 @@ def parse_source_date(value):
 
 
 def parse_number(value, excel_row, column):
-    """Convert numeric cells, preserving missing entries and signed balances."""
     if value is None or pd.isna(value):
         return float("nan")
     if isinstance(value, bool):
@@ -98,7 +95,6 @@ def parse_number(value, excel_row, column):
 
 
 def is_metadata_row(row):
-    """Allow blank rows and recognizable RBI headings/footers, not data-like rows."""
     first = "" if pd.isna(row.iloc[0]) else str(row.iloc[0]).strip()
     other = row.iloc[1:]
     if all(pd.isna(v) or str(v).strip().upper() in MISSING_TOKENS for v in other):
@@ -114,7 +110,6 @@ def main():
     if not SOURCE.is_file():
         raise FileNotFoundError(f"RBI workbook not found: {SOURCE}")
 
-    # Excel row 6 contains the date label; observations start at row 7.
     header = pd.read_excel(
         SOURCE, sheet_name=SHEET_NAME, header=None, usecols="B:AF",
         skiprows=5, nrows=1, dtype=object, engine="openpyxl",

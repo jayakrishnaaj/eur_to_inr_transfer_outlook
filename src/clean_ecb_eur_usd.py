@@ -3,7 +3,7 @@ from pathlib import Path
 import pandas as pd
 
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 SOURCE = PROJECT_ROOT / "data/raw/currency/ECB_EUR_USD_Exchange_Rate_Daily_2020_2026.csv"
 OUTPUT = PROJECT_ROOT / "data/interim/ECB_EUR_USD_Exchange_Rate_Daily_2020_2026_Clean.csv"
 REPORT = PROJECT_ROOT / "reports/quality/ECB_EUR_USD_Exchange_Rate_Daily_2020_2026_Quality.csv"
@@ -12,7 +12,6 @@ END_DATE = pd.Timestamp("2026-10-29")
 
 
 def main():
-    # Read all fields as text so malformed source values are not silently converted.
     raw = pd.read_csv(SOURCE, dtype="string", keep_default_na=False)
     expected = ["date", "base", "quote", "rate"]
     missing_columns = set(expected) - set(raw.columns)
@@ -27,13 +26,11 @@ def main():
     if not ((data["base"] == "EUR") & (data["quote"] == "USD")).all():
         raise ValueError("Unexpected currency direction: expected EUR -> USD throughout")
 
-    # Validate and retain parsed source dates for accurate raw date reporting.
     dates = pd.to_datetime(data["date"].str.strip(), format="%Y-%m-%d", errors="coerce")
     if dates.isna().any():
         raise ValueError(f"Found {int(dates.isna().sum())} invalid dates")
     data["date"] = dates
 
-    # Preserve genuine missing rates; reject unexpected numeric conventions.
     tokens = data["rate"].str.strip().replace(
         {"": pd.NA, ".": pd.NA, "-": pd.NA, "NA": pd.NA, "N/A": pd.NA}
     )
@@ -49,7 +46,6 @@ def main():
         raise ValueError("EUR/USD exchange rates must be positive")
     data["rate"] = rates.astype("float64")
 
-    # Remove identical duplicate dates, but reject conflicting rates.
     duplicate_dates = int(data["date"].duplicated().sum())
     conflicts = data.groupby("date")["rate"].nunique(dropna=False).gt(1)
     if conflicts.any():
@@ -58,22 +54,18 @@ def main():
         )
     data = data.sort_values("date").drop_duplicates("date", keep="first")
 
-    # Count excluded *unique observations* before filtering to the project window.
     in_range = data["date"].between(START_DATE, END_DATE)
     out_of_range_observations = int((~in_range).sum())
     data = data.loc[in_range].copy().reset_index(drop=True)
     if data.empty:
         raise ValueError("No EUR/USD observations fall within the requested date range")
 
-    # Flag calendar gaps; do not fabricate missing dates or rates.
     gap_days = data["date"].diff().dt.days
     long_gaps = [
         {"next_date": day.date().isoformat(), "gap_days": int(days)}
         for day, days in zip(data.loc[gap_days.gt(4), "date"], gap_days[gap_days.gt(4)])
     ]
 
-    # Flag unusually large changes between consecutive available observations.
-    # Missing-rate boundaries are not bridged when calculating differences.
     changes = data["rate"].diff().abs()
     valid_changes = changes.dropna()
     median_change = valid_changes.median()

@@ -1,6 +1,3 @@
-"""Large MOSPI outputs may be tens/hundreds of GB if every category is expanded.
-Use --start/--end or --all-india-general to limit output.
-"""
 import argparse
 import csv
 import io
@@ -53,15 +50,13 @@ def month_from_name(x):
 
 
 def excel_rows(source, entry, sheet_name=None):
-    # Each read returns one generator; make sure to exhaust before requesting another.
     with tempfile.TemporaryFile(suffix='.xlsx') as content:
         with source.open(entry) as f:
-            shutil.copyfileobj(f,content)  # avoid loading 145 MB MOSPI into RAM
+            shutil.copyfileobj(f,content)
         content.seek(0)
         wb = load_workbook(content, read_only=True, data_only=True)
         try:
             ws = wb[sheet_name] if sheet_name else wb.active
-            # Some Eurostat exports falsely declare their range as A1:A1.
             ws.reset_dimensions()
             for row in ws.iter_rows(values_only=True):
                 yield row
@@ -69,7 +64,6 @@ def excel_rows(source, entry, sheet_name=None):
 
 
 class DailyWriter:
-    """SQLite-spool keeps one row per observed date/series, not all expanded days."""
     def __init__(self, path, start, end):
         self.path, self.start, self.end = path, start, end
         self.tmp = tempfile.TemporaryDirectory(prefix='daily_spool_')
@@ -105,7 +99,7 @@ class DailyWriter:
                 carry = {}
                 for i,(ds,payload) in enumerate(records):
                     d = date.fromisoformat(ds)
-                    carry.update(json.loads(payload)) # each missing field retains old value
+                    carry.update(json.loads(payload))
                     next_d = date.fromisoformat(records[i+1][0]) if i+1 < len(records) else self.end+timedelta(days=1)
                     begin = max(d,self.start)
                     stop = min(next_d,self.end+timedelta(days=1))
@@ -126,7 +120,6 @@ class DailyWriter:
 
 
 def handle_reserve_money(zf, entry, out, start, end, **opts):
-    # Sheet Report(i): row 6/7 headers; row 8 onward; column B = Excel dates.
     columns=['reserve_money','currency_in_circulation','bankers_deposits','other_deposits',
              'net_rbi_credit_government','rbi_credit_banks','rbi_credit_commercial_sector',
              'net_foreign_exchange_assets','government_currency_liabilities',
@@ -140,8 +133,6 @@ def handle_reserve_money(zf, entry, out, start, end, **opts):
 
 
 def handle_worldbank(zf, entry, outdir, start, end, monthly_lag=0, **opts):
-    # 'Monthly Prices': headers row 5 and data row 7. 'Monthly Indices':
-    # multi-level headers rows 6-9 and data from row 10.
     for sheet,first_data,header_row in [('Monthly Prices',7,5),('Monthly Indices',10,6)]:
         names={}
         seen=set()
@@ -149,7 +140,6 @@ def handle_worldbank(zf, entry, outdir, start, end, monthly_lag=0, **opts):
         for i,row in enumerate(excel_rows(zf,entry,sheet),start=1):
             if i==header_row:
                 names={j:clean(v) or f'index_{j}' for j,v in enumerate(row) if j>0}
-                # Monthly Indices has additional labels, inspect all header levels below.
             if sheet=='Monthly Indices' and header_row < i < first_data:
                 for j,v in enumerate(row):
                     if j and clean(v): names[j]=clean(v)
@@ -165,7 +155,6 @@ def handle_worldbank(zf, entry, outdir, start, end, monthly_lag=0, **opts):
 
 
 def handle_eurostat(zf,entry,out,start,end,monthly_lag=0,**opts):
-    # Row 9 contains alternating month and flag columns; row 11+ contains regions.
     rows=excel_rows(zf,entry,'Sheet 1')
     dates={}
     writer=DailyWriter(out,start,end)
@@ -186,8 +175,6 @@ def handle_eurostat(zf,entry,out,start,end,monthly_lag=0,**opts):
 
 
 def handle_mospi(zf,entry,out,start,end,monthly_lag=0,all_india_general=False,**opts):
-    # 2012: baseyear/year/month_code/month/state/sector/group/subgroup/index/inflation/status
-    # 2024: base_year/series/year/month/state/sector/division/group/class/sub_class/item/code/index/inflation/... .
     rows=excel_rows(zf,entry)
     hdr=[str(c).strip().lower() if c is not None else f'unnamed_{i}' for i,c in enumerate(next(rows))]
     if 'month_code' in hdr:
@@ -210,7 +197,6 @@ def handle_mospi(zf,entry,out,start,end,monthly_lag=0,all_india_general=False,**
 
 
 def handle_policy_xlsx(zf,entry,out,start,end,**opts):
-    # Effective dates in B; rates in C-I; hyphen means unchanged for that rate.
     writer=DailyWriter(out,start,end)
     for n,row in enumerate(excel_rows(zf,entry,'Report 1'),start=1):
         if n<9:continue
@@ -220,7 +206,6 @@ def handle_policy_xlsx(zf,entry,out,start,end,**opts):
 
 
 def handle_policy_csv(zf,entry,out,start,end,**opts):
-    # Original policy CSV has rate columns c2-c8 blank. Do not manufacture rates.
     data=csv.DictReader(io.TextIOWrapper(zf.open(entry),encoding='utf-8-sig'))
     writer=DailyWriter(out,start,end)
     rows=0
@@ -250,7 +235,6 @@ def handle_weekly_clean(csv_path,out,start,end):
 
 
 class DirectorySource:
-    """Allow the existing spreadsheet readers to read files from normal folders."""
     def open(self, entry):
         return Path(entry).open('rb')
 

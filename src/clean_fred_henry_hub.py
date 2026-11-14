@@ -2,7 +2,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 SOURCE = PROJECT_ROOT / 'data/raw/energy/FRED_US_Henry_Hub_Natural_Gas_Price_Daily_2020_2026.csv'
 OUTPUT = PROJECT_ROOT / 'data/interim/FRED_US_Henry_Hub_Natural_Gas_Price_Daily_2020_2026_Clean.csv'
 REPORT = PROJECT_ROOT / 'reports/quality/FRED_US_Henry_Hub_Natural_Gas_Price_Daily_2020_2026_Quality.csv'
@@ -17,7 +17,6 @@ def main() -> None:
     if not SOURCE.is_file():
         raise FileNotFoundError(f'Source CSV not found: {SOURCE}')
 
-    # Read source fields as strings so erroneous values cannot be silently changed.
     raw = pd.read_csv(SOURCE, dtype='string', keep_default_na=False, encoding='utf-8-sig')
     if raw.columns.tolist() != EXPECTED_COLUMNS:
         raise ValueError(f'Unexpected source columns: {raw.columns.tolist()}')
@@ -33,7 +32,6 @@ def main() -> None:
 
     tokens = raw['DHHNGSP'].str.strip()
     missing_mask = tokens.str.upper().isin(MISSING_MARKERS)
-    # FRED uses periods for missing observations; retain them as NaN.
     numeric = pd.to_numeric(tokens.mask(missing_mask), errors='coerce').astype('float64')
     invalid = ~missing_mask & (numeric.isna() | ~np.isfinite(numeric))
     if invalid.any():
@@ -42,7 +40,6 @@ def main() -> None:
         raise ValueError('Nonpositive Henry Hub price(s) found; investigate source')
 
     data = pd.DataFrame({'date': source_dates, VALUE_COLUMN: numeric})
-    # Validate all duplicates before date-range filtering; NaN vs numeric is a conflict.
     conflicts = data.groupby('date')[VALUE_COLUMN].nunique(dropna=False).gt(1)
     if conflicts.any():
         examples = conflicts[conflicts].index.strftime('%Y-%m-%d').tolist()[:5]
@@ -58,7 +55,6 @@ def main() -> None:
     if data.empty:
         raise ValueError('No observations in the selected study period')
 
-    # Calculate movements over consecutive nonmissing observations; never delete them.
     valid = data.dropna(subset=[VALUE_COLUMN])
     differences = valid[VALUE_COLUMN].diff().abs().dropna()
     jump_dates = []

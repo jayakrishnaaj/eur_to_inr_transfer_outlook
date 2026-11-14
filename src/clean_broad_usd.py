@@ -1,8 +1,7 @@
-"""The 'date' in the output is the observation date, NOT the release date. The H.10 publication lag must be handled separately before historical ML merges. """
 from pathlib import Path
 import pandas as pd
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
 RAW = PROJECT_ROOT / "data" / "raw" / "currency" / "FRED_US_Broad_Dollar_Index.csv"
 OUT = PROJECT_ROOT / "data" / "interim" / "FRED_US_Broad_Dollar_Index_Clean.csv"
@@ -17,12 +16,10 @@ def main():
         raise ValueError(f'Unexpected columns: {list(df.columns)}')
 
     raw_rows = len(df)
-    # Parse dates strictly. Never silently discard malformed source dates.
     df['date'] = pd.to_datetime(df['observation_date'], format='%Y-%m-%d', errors='coerce')
     if df['date'].isna().any():
         raise ValueError(f"Found {df['date'].isna().sum()} unparseable dates; inspect the raw file.")
 
-    # Coerce blank / '.' / '-' to NaN; don't replace missing numeric observations.
     text_values = df['DTWEXBGS'].str.strip().str.replace(',', '', regex=False)
     missing_tokens = {'', '.', '-', 'NA', 'N/A', 'nan'}
     invalid = text_values.notna() & ~text_values.isin(missing_tokens) & pd.to_numeric(text_values, errors='coerce').isna()
@@ -32,20 +29,17 @@ def main():
     if (df['broad_usd_index_2006_100'].dropna() <= 0).any():
         raise ValueError('Index values should be positive; inspect nonpositive values.')
 
-    # Identical duplicate dates can be removed; conflicting ones need investigation.
     conflicts = df.groupby('date')['broad_usd_index_2006_100'].nunique(dropna=False)
     if (conflicts > 1).any():
         raise ValueError(f'Conflicting values on dates: {conflicts[conflicts > 1].index.tolist()}')
     duplicates = int(df['date'].duplicated().sum())
     df = df.sort_values('date').drop_duplicates('date', keep='first')
 
-    # Restrict to project's chosen time range; keep the 2019 record in raw data.
     df = df.loc[df['date'] >= START, ['date', 'broad_usd_index_2006_100']]
     OUT.parent.mkdir(parents=True, exist_ok=True)
     REPORT.parent.mkdir(parents=True, exist_ok=True)
     df.to_csv(OUT, index=False, date_format='%Y-%m-%d', na_rep='')
 
-    # Human-readable report retained separately; processed file remains numeric-only.
     vals = df['broad_usd_index_2006_100'].dropna()
     changes = vals.diff().abs().dropna()
     median_change = changes.median()

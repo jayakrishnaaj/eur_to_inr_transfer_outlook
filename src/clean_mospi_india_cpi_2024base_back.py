@@ -12,8 +12,7 @@ from zipfile import ZipFile
 from xml.etree import ElementTree as ET
 from posixpath import normpath
 
-# Expected location: <project>/scripts/cleaning/this_script.py
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 SOURCE = PROJECT_ROOT / 'data/raw/inflation/MOSPI_India_CPI_2024_Base_Current_2026.xlsx'
 OUTPUT = PROJECT_ROOT / 'data/interim/MOSPI_India_CPI_2024_Base_Current_2026_Clean.csv'
 REPORT = PROJECT_ROOT / 'reports/quality/MOSPI_India_CPI_2024_Base_Current_2026_Quality.csv'
@@ -72,11 +71,6 @@ def calendar_months(start: date, end: date) -> list[date]:
 
 
 def iter_worksheet_rows(source: Path, sheet_name: str):
-    """Stream XLSX cells using only Python's standard library.
-
-    Supports inline and shared strings, numbers, booleans and blank cells.
-    Formula cells use the cached value saved by Excel, when present.
-    """
     ns = '{http://schemas.openxmlformats.org/spreadsheetml/2006/main}'
     rel_ns = '{http://schemas.openxmlformats.org/officeDocument/2006/relationships}'
     pkg_ns = '{http://schemas.openxmlformats.org/package/2006/relationships}'

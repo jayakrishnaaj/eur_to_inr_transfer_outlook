@@ -3,16 +3,14 @@ import math
 import re
 import pandas as pd
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 SOURCE = PROJECT_ROOT / "data/raw/energy/WorldBank_Global_Commodity_Prices_Monthly.xlsx"
 OUTPUT = PROJECT_ROOT / "data/interim/WorldBank_Global_Commodity_Prices_Monthly_Clean.csv"
 REPORT = PROJECT_ROOT / "reports/quality/WorldBank_Global_Commodity_Prices_Monthly_Quality.csv"
 START_DATE = pd.Timestamp("2020-01-01")
-END_DATE = pd.Timestamp("2026-10-01")  # Inclusive reference month, if present.
+END_DATE = pd.Timestamp("2026-10-01")
 SHEET_NAME = "Monthly Prices"
 
-# Each source heading maps to (standardized output column, expected workbook unit,
-# human-readable unit). No currency or physical-unit conversions are performed.
 SERIES = {
     "Gold": ("gold_usd_per_troy_oz", "($/troy oz)", "USD/troy ounce"),
     "Silver": ("silver_usd_per_troy_oz", "($/troy oz)", "USD/troy ounce"),
@@ -39,8 +37,6 @@ def parse_price(value, *, column: str, period: str, excel_row: int) -> float:
         return float("nan")
     if text.startswith("(") and text.endswith(")"):
         text = "-" + text[1:-1].strip()
-    # Commodity prices are represented with period decimals and optional
-    # grouping commas in the supplied workbook convention.
     text = text.replace(",", "")
     try:
         number = float(text)
@@ -59,8 +55,6 @@ def main() -> None:
     if not SOURCE.is_file():
         raise FileNotFoundError(f"Source workbook not found: {SOURCE}")
 
-    # Original workbook: row 5 = commodity headings; row 6 = units;
-    # observations begin at row 7. No fixed final row is assumed.
     raw = pd.read_excel(
         SOURCE,
         sheet_name=SHEET_NAME,
@@ -102,8 +96,6 @@ def main() -> None:
         label = "" if pd.isna(first_cell) else str(first_cell).strip()
         match = PERIOD_PATTERN.fullmatch(label)
         if match is None:
-            # Blank explanatory lines and named notes are not time-series data.
-            # Unexpected labels with price-like cells must not be silently skipped.
             selected_values = row.iloc[selected_indices]
             populated_numeric_cells = selected_values.map(
                 lambda value: pd.notna(value) and str(value).strip() != ""
@@ -146,8 +138,6 @@ def main() -> None:
         )
     data = data.sort_values("date").drop_duplicates("date", keep="first").reset_index(drop=True)
 
-    # A monthly series has one reference date per month. Detect absent months
-    # between the first and last observed months; do not manufacture new rows.
     complete_months = pd.date_range(data["date"].iloc[0], data["date"].iloc[-1], freq="MS")
     missing_months = complete_months.difference(pd.DatetimeIndex(data["date"]))
     missing_counts = {column: int(data[column].isna().sum()) for column in OUTPUT_COLUMNS[1:]}

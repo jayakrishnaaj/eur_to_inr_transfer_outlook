@@ -1,4 +1,3 @@
-"""Combining the money related csv togeter without changing the data to daily."""
 from __future__ import annotations
 
 import argparse
@@ -55,8 +54,6 @@ def load_data(folder: Path) -> pd.DataFrame:
             raise ValueError(f"Duplicate date rows in {filename}; please inspect")
 
         frame = frame.set_index("date").sort_index()
-        # Every feature in these 24 files is numeric. Validate this rather
-        # than silently dropping or modifying any supplied information.
         for column in frame.columns:
             if frame[column].dtype == "object":
                 frame[column] = pd.to_numeric(frame[column], errors="raise")
@@ -75,8 +72,6 @@ def load_data(folder: Path) -> pd.DataFrame:
                     f"on dates {examples}. Resolve manually before merging."
                 )
 
-        # combine_first: add new dates and features, and only fill missing
-        # values for feature names already present. No _x/_y duplicates.
         combined = combined.combine_first(frame)
         print(f"[{number:02d}/{len(FILES)}] Included {filename} ({len(frame):,} rows)")
 
@@ -107,8 +102,6 @@ def main() -> None:
     if first > last:
         raise ValueError("Start date must not be after end date")
 
-    # Carry forward from historical observations even if --start is later.
-    # Never back-fill dates before an indicator's first observation.
     dates = pd.date_range(min(first, combined.index.min()), last, freq="D", name="date")
     combined = combined.reindex(dates)
     if not args.no_forward_fill:
