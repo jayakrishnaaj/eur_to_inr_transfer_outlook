@@ -6,7 +6,7 @@ Can a model tell someone in Germany, better than a coin flip, whether waiting up
 ## Team
 - Jayakrishna
 - Rosa
-- Abey
+- Abhay
 
 ## Setup (Windows)
 ```
