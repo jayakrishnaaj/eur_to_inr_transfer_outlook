@@ -36,11 +36,8 @@ for name, series_id in SERIES.items():
     data[name] = obs.dropna().set_index(pd.to_datetime(obs.dropna()["date"]))["value"]
     print(f"ok    {name:11s} {data[name].index.min():%Y-%m-%d} .. {data[name].index.max():%Y-%m-%d}")
 
-# combine, fill holidays with the last value, add features
+# combine, fill holidays with the last value
 wide = pd.DataFrame(data).sort_index().ffill()
-for name in SERIES:
-    wide[f"{name}_chg_1w"] = wide[name] - wide[name].shift(5)
-    wide[f"{name}_avg_4w"] = wide[name].rolling(20, min_periods=15).mean()
 
 # US closing values come after the ECB rate, so use them from the next day
 wide.index.name = "risk_obs_date"
